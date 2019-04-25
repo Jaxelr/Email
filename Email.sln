@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Model.Email.Standard", "Api.Model.Email.Standard\Api.Model.Email.Standard.csproj", "{4F8F5819-C15E-4A5C-9488-4DE48A7ADC7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{37FB0A24-3754-43E8-A3FD-57EB872B9361}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37FB0A24-3754-43E8-A3FD-57EB872B9361}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37FB0A24-3754-43E8-A3FD-57EB872B9361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F8F5819-C15E-4A5C-9488-4DE48A7ADC7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F8F5819-C15E-4A5C-9488-4DE48A7ADC7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F8F5819-C15E-4A5C-9488-4DE48A7ADC7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F8F5819-C15E-4A5C-9488-4DE48A7ADC7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
