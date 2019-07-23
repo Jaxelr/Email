@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Carter;
-using EmailService.Cache;
 using EmailService.Entities;
 using EmailService.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -46,8 +45,6 @@ namespace EmailService
             Configuration.GetSection(nameof(AppSettings)).Bind(settings);
 
             services.AddSingleton(settings); //AppSettings type
-            services.AddSingleton(settings.Cache); //CacheConfig type
-            services.AddSingleton<Store>(); //Cache Store
 
             services.AddTransient<IEmailRepository>(imp => new SmtpRepository(settings.SmtpServer));
 

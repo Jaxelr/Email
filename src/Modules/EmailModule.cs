@@ -1,5 +1,4 @@
 ﻿using Carter;
-using EmailService.Cache;
 using EmailService.Entities.Operations;
 using EmailService.Extensions;
 using EmailService.Modules.Metadata;
@@ -11,13 +10,11 @@ namespace EmailService.Modules
     {
 #pragma warning disable IDE0052 // Remove unread private members
         private readonly IEmailRepository repository;
-        private readonly Store store;
 #pragma warning restore IDE0052 // Remove unread private members
 
-        public EmailModule(IEmailRepository repository, Store store)
+        public EmailModule(IEmailRepository repository)
         {
             this.repository = repository;
-            this.store = store;
 
             Post<PostEmail>("/Email", (req, res, routeData) =>
             {
