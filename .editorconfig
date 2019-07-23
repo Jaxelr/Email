@@ -31,7 +31,7 @@ indent_size = 2
 
 # Markdown Files
 [*.md]
-trim_trailing_whitespace = false
+trim_trailing_whitespace = true
 
 # Web Files
 [*.{htm,html,js,ts,tsx,css,sass,scss,less,svg,vue}]
