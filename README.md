@@ -7,7 +7,7 @@ This service allows the user to use an smtp (or sendgrid) configuration and send
 Some configurations that are included on the appsettings are:
 
 1. SmtpServer - Required: the smtp server to be used for emailing.
-1. Servers - Optional: if left empty the current host is selected. Urls defined here, will be used as endpoints on the open ui page for validation.
+1. Addresses - Optional: if left empty the current host is selected. Urls defined here, will be used as endpoints on the open ui page for validation.
 
 The current appsettings.json can be configured manually:
 
