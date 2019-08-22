@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Carter;
 using EmailService.Entities;
+using EmailService.Extensions;
 using EmailService.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting.Server.Features;
@@ -54,7 +54,7 @@ namespace EmailService
 
         public void Configure(IApplicationBuilder app, AppSettings appSettings)
         {
-            ICollection<string> addresses = Empty(appSettings.Addresses) ?
+            ICollection<string> addresses = appSettings.Addresses.Empty() ?
                                 app.ServerFeatures.Get<IServerAddressesFeature>().Addresses :
                                 appSettings.Addresses;
 
@@ -69,16 +69,5 @@ namespace EmailService
 
         private CarterOptions GetOptions(ICollection<string> addresses) =>
             new CarterOptions(openApiOptions: new OpenApiOptions(ServiceName, addresses, new Dictionary<string, OpenApiSecurity>()));
-
-        /// <summary>
-        /// Since the mapping from the DI returns an instantiated class as based on the appsettings.json
-        /// config file, we must check if the only element included is not empty, then we can define it as empty.
-        /// </summary>
-        /// <param name="collection"></param>
-        /// <returns></returns>
-        private bool Empty(ICollection<string> collection) =>
-            (collection.Count == 1 && string.IsNullOrEmpty(collection.FirstOrDefault())) ?
-            true :
-            false;
     }
 }
