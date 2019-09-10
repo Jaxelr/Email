@@ -8,14 +8,8 @@ namespace EmailService.Modules
 {
     public class EmailModule : CarterModule
     {
-#pragma warning disable IDE0052 // Remove unread private members
-        private readonly IEmailRepository repository;
-#pragma warning restore IDE0052 // Remove unread private members
-
         public EmailModule(IEmailRepository repository)
         {
-            this.repository = repository;
-
             Post<PostEmail>("/Email", (req, res, routeData) =>
             {
                 return res.ExecHandler<PostEmailRequest, PostEmailResponse>(req, (request) =>

@@ -1,8 +1,8 @@
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+
 namespace EmailService
 {
-    using System.IO;
-    using Microsoft.AspNetCore.Hosting;
-
     public class Program
     {
 #pragma warning disable IDE0060 // Remove unused parameter
