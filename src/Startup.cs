@@ -62,8 +62,8 @@ namespace EmailService
 
             app.UseSwaggerUI(opt =>
             {
-                opt.RoutePrefix = RouteDefinition.RoutePrefix;
-                opt.SwaggerEndpoint(RouteDefinition.SwaggerEndpoint, ServiceName);
+                opt.RoutePrefix = appSettings.RouteDefinition.RoutePrefix;
+                opt.SwaggerEndpoint(appSettings.RouteDefinition.SwaggerEndpoint, ServiceName);
             });
         }
 

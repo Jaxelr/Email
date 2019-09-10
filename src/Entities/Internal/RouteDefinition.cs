@@ -2,7 +2,7 @@
 {
     public class RouteDefinition
     {
-        public static string RoutePrefix => "openapi/ui";
-        public static string SwaggerEndpoint => "/openapi";
+        public string RoutePrefix { get; set; }
+        public string SwaggerEndpoint { get; set; }
     }
 }

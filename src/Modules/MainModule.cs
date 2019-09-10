@@ -6,11 +6,11 @@ namespace EmailService.Modules
 {
     public class MainModule : CarterModule
     {
-        public MainModule()
+        public MainModule(AppSettings app)
         {
             Get("/", (req, res, routeData) =>
             {
-                res.Redirect(RouteDefinition.RoutePrefix);
+                res.Redirect(app.RouteDefinition.RoutePrefix);
 
                 return Task.CompletedTask;
             });

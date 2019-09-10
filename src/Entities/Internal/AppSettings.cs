@@ -6,6 +6,7 @@ namespace EmailService.Entities
     {
         public CacheConfig Cache { get; set; }
         public string SmtpServer { get; set; }
+        public RouteDefinition RouteDefinition { get; set; }
         public ICollection<string> Addresses { get; set; }
     }
 }
