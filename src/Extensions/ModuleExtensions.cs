@@ -8,6 +8,13 @@ namespace EmailService.Extensions
 {
     public static class ModuleExtensions
     {
+        /// <summary>
+        /// Encapsulate execution of handler with the corresponding validation logic
+        /// </summary>
+        /// <typeparam name="TOut"></typeparam>
+        /// <param name="res">An http response that will be populated</param>
+        /// <param name="handler">A func handler that will be validated and executed</param>
+        /// <returns></returns>
         public static Task ExecHandler<TOut>(this HttpResponse res, Func<TOut> handler)
         {
             try
@@ -30,6 +37,15 @@ namespace EmailService.Extensions
             }
         }
 
+        /// <summary>
+        /// Encapsulate execution of handler with the validation logic while binding and validating the http request
+        /// </summary>
+        /// <typeparam name="TIn"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
+        /// <param name="res">An http response that will be populated</param>
+        /// <param name="req">An http request that will be binded and validated</param>
+        /// <param name="handler">A func handler that will be validated and executed</param>
+        /// <returns></returns>
         public static Task ExecHandler<TIn, TOut>(this HttpResponse res, HttpRequest req, Func<TIn, TOut> handler)
         {
             try
