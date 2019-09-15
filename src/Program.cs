@@ -5,10 +5,7 @@ namespace EmailService
 {
     public class Program
     {
-#pragma warning disable IDE0060 // Remove unused parameter
-
-        public static void Main(string[] args)
-#pragma warning restore IDE0060 // Remove unused parameter
+        public static void Main()
         {
             var host = new WebHostBuilder()
                 .UseContentRoot(Directory.GetCurrentDirectory())
