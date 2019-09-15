@@ -49,7 +49,6 @@ namespace EmailService
             services.AddTransient<IEmailRepository>(imp => new SmtpRepository(settings.SmtpServer));
 
             services.AddCarter();
-            services.AddMemoryCache();
         }
 
         public void Configure(IApplicationBuilder app, AppSettings appSettings)
