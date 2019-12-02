@@ -1,19 +1,23 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace EmailService
 {
     public class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseKestrel()
-                .UseIISIntegration()
-                .UseHealthChecks("/healthcheck")
-                .UseStartup<Startup>()
-                .Build();
+            var host = Host.CreateDefaultBuilder(args)
+                    .ConfigureWebHostDefaults(webBuilder =>
+                    {
+                        webBuilder
+                        .UseContentRoot(Directory.GetCurrentDirectory())
+                        .UseHealthChecks("/healthcheck")
+                        .UseStartup<Startup>()
+                        .UseIISIntegration();
+                    })
+                    .Build();
 
             host.Run();
         }

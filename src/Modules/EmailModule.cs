@@ -10,7 +10,7 @@ namespace EmailService.Modules
     {
         public EmailModule(IEmailRepository repository)
         {
-            Post<PostEmail>("/Email", (req, res, routeData) =>
+            Post<PostEmail>("/Email", (req, res) =>
             {
                 return res.ExecHandler<PostEmailRequest, PostEmailResponse>(req, (request) =>
                 {

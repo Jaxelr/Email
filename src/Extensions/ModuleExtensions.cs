@@ -15,7 +15,7 @@ namespace EmailService.Extensions
         /// <param name="res">An http response that will be populated</param>
         /// <param name="handler">A func handler that will be validated and executed</param>
         /// <returns></returns>
-        public static Task ExecHandler<TOut>(this HttpResponse res, Func<TOut> handler)
+        public static async Task ExecHandler<TOut>(this HttpResponse res, Func<TOut> handler)
         {
             try
             {
@@ -24,16 +24,16 @@ namespace EmailService.Extensions
                 if (response == null)
                 {
                     res.StatusCode = 204;
-                    return Task.CompletedTask;
+                    return;
                 }
 
                 res.StatusCode = 200;
-                return res.Negotiate(response);
+                await res.Negotiate(response);
             }
             catch (Exception ex)
             {
                 res.StatusCode = 500;
-                return res.Negotiate(ex.Message);
+                await res.Negotiate(ex.Message);
             }
         }
 
@@ -46,16 +46,17 @@ namespace EmailService.Extensions
         /// <param name="req">An http request that will be binded and validated</param>
         /// <param name="handler">A func handler that will be validated and executed</param>
         /// <returns></returns>
-        public static Task ExecHandler<TIn, TOut>(this HttpResponse res, HttpRequest req, Func<TIn, TOut> handler)
+        public static async Task ExecHandler<TIn, TOut>(this HttpResponse res, HttpRequest req, Func<TIn, TOut> handler)
         {
             try
             {
-                var (validationResult, data) = req.BindAndValidate<TIn>();
+                var (validationResult, data) = await req.BindAndValidate<TIn>();
 
                 if (!validationResult.IsValid)
                 {
                     res.StatusCode = 422;
-                    return res.Negotiate(validationResult.GetFormattedErrors());
+                    await res.Negotiate(validationResult.GetFormattedErrors());
+                    return;
                 }
 
                 var response = handler(data);
@@ -63,16 +64,16 @@ namespace EmailService.Extensions
                 if (response == null)
                 {
                     res.StatusCode = 204;
-                    return Task.CompletedTask;
+                    return;
                 }
 
                 res.StatusCode = 200;
-                return res.Negotiate(response);
+                await res.Negotiate(response);
             }
             catch (Exception ex)
             {
                 res.StatusCode = 500;
-                return res.Negotiate(ex.Message);
+                await res.Negotiate(ex.Message);
             }
         }
     }

@@ -8,7 +8,7 @@ namespace EmailService.Modules
     {
         public MainModule(AppSettings app)
         {
-            Get("/", (req, res, routeData) =>
+            Get("/", (req, res) =>
             {
                 res.Redirect(app.RouteDefinition.RoutePrefix);
 

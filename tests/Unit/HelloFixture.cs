@@ -1,30 +1,35 @@
-﻿using System.Net;
+﻿using System;
 using System.Net.Http;
-using System.Threading.Tasks;
 using EmailService;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.TestHost;
-using Xunit;
 
 namespace Api.Test.Unit
 {
-    public class HelloModuleFixture
+    public class HelloModuleFixture : IDisposable
     {
         private readonly HttpClient client;
+        private readonly TestServer server;
 
         public HelloModuleFixture()
         {
             var featureCollection = new FeatureCollection();
             featureCollection.Set<IServerAddressesFeature>(new ServerAddressesFeature());
 
-            var server = new TestServer(WebHost.CreateDefaultBuilder()
+            server = new TestServer(WebHost.CreateDefaultBuilder()
                     .UseStartup<Startup>(), featureCollection
             );
 
             client = server.CreateClient();
+        }
+
+        public void Dispose()
+        {
+            client?.Dispose();
+            server?.Dispose();
         }
 
         //[Fact]

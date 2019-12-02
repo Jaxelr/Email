@@ -6,6 +6,6 @@ namespace EmailService.Entities
     {
         public string SmtpServer { get; set; }
         public RouteDefinition RouteDefinition { get; set; }
-        public ICollection<string> Addresses { get; set; }
+        public ICollection<string> ServerUrls { get; set; }
     }
 }

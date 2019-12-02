@@ -15,11 +15,17 @@ namespace EmailService.Modules.Metadata
             {
                 Code = 200,
                 Description = $"A response if it was succesful and a reason why it wasnt.",
-                Response = typeof(PostEmailResponse)
+                Response = typeof(PostEmailResponse),
             }
         };
 
-        public override Type Request => typeof(PostEmailRequest);
+        public override RouteMetaDataRequest[] Requests { get; } =
+        {
+            new RouteMetaDataRequest
+            {
+                Request = typeof(PostEmailRequest),
+            }
+        };
 
         public override string Description => DescriptionInfo;
 
