@@ -32,8 +32,17 @@ The current appsettings.json can be configured manually:
 
 ## HealthChecker
 
-The endpoint of root/healthcheck for each requests includes a json heartbeat to determine if the service is online. This was done using the library of [Microsoft.AspnetCore.HealthChecks](https://github.com/dotnet-architecture/HealthChecks) for more information check the github repo.
+The endpoint of root/healthcheck for each requests includes a json heartbeat to determine if the service is online. This was done using the library of [Microsoft.AspnetCore.HealthChecks](https://github.com/aspnet/Extensions/tree/master/src/HealthChecks/HealthChecks) for more information check the github repo.
 
 ## OpenApi
 
 The OpenApi version used is Version 3.0.0
+
+## Libraries
+
+The following libs are used on this repo:
+
+- [Carter](https://github.com/CarterCommunity/Carter)
+- [Xunit](https://github.com/xunit/xunit)
+- [Swashbuckle.Swaggerui](https://github.com/domaindrivendev/Swashbuckle)
+
