@@ -16,7 +16,7 @@ namespace EmailService
 {
     public class Startup
     {
-        private IConfiguration Configuration { get; set; }
+        private IConfiguration Configuration { get; }
 
         private readonly AppSettings settings;
 
@@ -44,7 +44,7 @@ namespace EmailService
 
             services.AddSingleton(settings); //AppSettings type
 
-            services.AddTransient<IEmailRepository>(imp => new SmtpRepository(settings.SmtpServer));
+            services.AddTransient<IEmailRepository>(_ => new SmtpRepository(settings.SmtpServer));
 
             services.AddCarter(options =>
             {

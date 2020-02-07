@@ -40,8 +40,7 @@ namespace EmailService.Repositories
         /// <returns></returns>
         public IEmailRepository To(IEnumerable<string> to)
         {
-            if (to != null)
-                to.ForEach(i => Message.To.Add(i));
+            to?.ForEach(i => Message.To.Add(i));
             return this;
         }
 
@@ -52,10 +51,7 @@ namespace EmailService.Repositories
         /// <returns></returns>
         public IEmailRepository Cc(IEnumerable<string> cc)
         {
-            if (cc != null)
-            {
-                cc.ForEach(i => Message.CC.Add(i));
-            }
+            cc?.ForEach(i => Message.CC.Add(i));
 
             return this;
         }
@@ -67,10 +63,7 @@ namespace EmailService.Repositories
         /// <returns></returns>
         public IEmailRepository Bcc(IEnumerable<string> bcc)
         {
-            if (bcc != null)
-            {
-                bcc.ForEach(i => Message.Bcc.Add(i));
-            }
+            bcc?.ForEach(i => Message.Bcc.Add(i));
 
             return this;
         }
@@ -180,11 +173,8 @@ namespace EmailService.Repositories
         /// </summary>
         public void Dispose()
         {
-            if (client != null)
-                client.Dispose();
-
-            if (Message != null)
-                Message.Dispose();
+            client?.Dispose();
+            Message?.Dispose();
         }
     }
 }
