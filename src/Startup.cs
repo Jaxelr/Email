@@ -27,7 +27,7 @@ namespace EmailService
             var builder = new ConfigurationBuilder()
               .SetBasePath(env.ContentRootPath)
               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-              .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+              .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
               .AddEnvironmentVariables();
 
             Configuration = builder.Build();
@@ -42,14 +42,11 @@ namespace EmailService
             //HealthChecks
             services.AddHealthChecks();
 
-            services.AddSingleton(settings); //AppSettings type
+            services.AddSingleton(settings); //typeof(AppSettings)
 
             services.AddTransient<IEmailRepository>(_ => new SmtpRepository(settings.SmtpServer));
 
-            services.AddCarter(options =>
-            {
-                options.OpenApi = GetOpenApiOptions(settings);
-            });
+            services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
         }
 
         public void Configure(IApplicationBuilder app, AppSettings appSettings)
