@@ -1,5 +1,4 @@
-﻿using System;
-using Carter.OpenApi;
+﻿using Carter.OpenApi;
 using EmailService.Entities.Operations;
 
 namespace EmailService.Modules.Metadata
@@ -14,7 +13,7 @@ namespace EmailService.Modules.Metadata
             new RouteMetaDataResponse
             {
                 Code = 200,
-                Description = $"A response if it was succesful and a reason why it wasnt.",
+                Description = "A response if it was successful and a reason why it wasnt.",
                 Response = typeof(PostEmailResponse),
             }
         };
