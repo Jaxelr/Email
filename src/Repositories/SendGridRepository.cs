@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using e = EmailService.Entities.Models;
+using model = EmailService.Entities.Models;
 
 namespace EmailService.Repositories
 {
@@ -38,7 +38,7 @@ namespace EmailService.Repositories
         /// </summary>
         /// <param name="attachment"></param>
         /// <returns></returns>
-        public IEmailRepository Attach(e.Attachment attachment)
+        public IEmailRepository Attach(model.Attachment attachment)
         {
             if (attachment != null)
             {
