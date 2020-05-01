@@ -23,6 +23,8 @@ namespace EmailService
 
         private const string ServiceName = "Email Service";
 
+        private string Policy => "DefaultPolicy";
+
         public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -43,6 +45,19 @@ namespace EmailService
             services.AddSingleton(settings); //typeof(AppSettings)
 
             services.AddTransient<IEmailRepository>(_ => new SmtpRepository(settings.SmtpServer));
+
+            //Change Cors as needed.
+            services.AddCors(options =>
+            {
+                options.AddPolicy(Policy,
+                builder =>
+                {
+                    builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                });
+            });
 
             services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
 
