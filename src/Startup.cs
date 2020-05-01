@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace EmailService
@@ -39,14 +40,22 @@ namespace EmailService
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //HealthChecks
-            services.AddHealthChecks();
-
             services.AddSingleton(settings); //typeof(AppSettings)
 
             services.AddTransient<IEmailRepository>(_ => new SmtpRepository(settings.SmtpServer));
 
             services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
+
+            services.AddLogging(opt =>
+            {
+                opt.ClearProviders();
+                opt.AddConsole();
+                opt.AddDebug();
+                opt.AddConfiguration(Configuration.GetSection("Logging"));
+            });
+
+            //HealthChecks
+            services.AddHealthChecks();
         }
 
         public void Configure(IApplicationBuilder app, AppSettings appSettings)
