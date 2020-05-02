@@ -16,6 +16,14 @@ The current appsettings.json can be configured manually:
 
 ```json
 {
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    },
+    "Console": {
+      "IncludeScopes": false
+    }
+  },
   "AppSettings": {
     "SmtpServer": "<SmtpServer>",
     "Addresses": [
@@ -32,15 +40,15 @@ The current appsettings.json can be configured manually:
 
 ## HealthChecker
 
-The endpoint of root/healthcheck for each requests includes a json heartbeat to determine if the service is online. This was done using the library of [Microsoft.AspnetCore.HealthChecks](https://github.com/aspnet/Extensions/tree/master/src/HealthChecks/HealthChecks) for more information check the github repo.
+The endpoint of root/healthcheck for each requests includes a json heartbeat to determine if the service is online. This was done using the library of [Microsoft.AspnetCore.HealthChecks](https://github.com/dotnet/aspnetcore/tree/master/src/HealthChecks) for more information check the github repo.
 
 ## OpenApi
 
 The OpenApi version used is Version 3.0.0
 
-## Libraries
+## Dependencies & Libraries
 
-The following libs are used on this repo:
+This project depends on dotnetcore 3.1. The following oss libraries are used on this repo as dependencies:
 
 - [Carter](https://github.com/CarterCommunity/Carter)
 - [Xunit](https://github.com/xunit/xunit)
