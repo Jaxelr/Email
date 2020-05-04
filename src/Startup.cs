@@ -75,6 +75,8 @@ namespace EmailService
 
         public void Configure(IApplicationBuilder app, AppSettings appSettings)
         {
+            app.UseCors(Policy);
+
             app.UseRouting();
 
             app.UseSwaggerUI(opt =>
