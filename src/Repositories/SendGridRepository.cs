@@ -37,7 +37,6 @@ namespace EmailService.Repositories
         /// Include an attachment to the email
         /// </summary>
         /// <param name="attachment"></param>
-        /// <returns></returns>
         public IEmailRepository Attach(model.Attachment attachment)
         {
             if (attachment != null)
@@ -52,10 +51,9 @@ namespace EmailService.Repositories
         /// Add Bcc emails recipients
         /// </summary>
         /// <param name="bcc"></param>
-        /// <returns></returns>
         public IEmailRepository Bcc(IEnumerable<string> bcc)
         {
-            if (bcc != null)
+            if (bcc?.Count() > 0)
             {
                 Message.AddBccs(bcc.Select(x => new EmailAddress(x)).ToList());
             }
@@ -67,7 +65,6 @@ namespace EmailService.Repositories
         /// Add email body
         /// </summary>
         /// <param name="body"></param>
-        /// <returns></returns>
         public IEmailRepository Body(string body)
         {
             if (bodyIsHtml)
@@ -85,7 +82,6 @@ namespace EmailService.Repositories
         /// <summary>
         /// Add html flag on message
         /// </summary>
-        /// <returns></returns>
         public IEmailRepository BodyAsHtml()
         {
             bodyIsHtml = true;
@@ -95,7 +91,6 @@ namespace EmailService.Repositories
         /// <summary>
         /// Remove html flag on message
         /// </summary>
-        /// <returns></returns>
         public IEmailRepository BodyAsPlainText()
         {
             bodyIsHtml = false;
@@ -106,10 +101,9 @@ namespace EmailService.Repositories
         /// Add Cc emails recipients
         /// </summary>
         /// <param name="cc"></param>
-        /// <returns></returns>
         public IEmailRepository Cc(IEnumerable<string> cc)
         {
-            if (cc != null)
+            if (cc?.Count() > 0)
             {
                 Message.AddCcs(cc.Select(x => new EmailAddress(x)).ToList());
             }
@@ -121,7 +115,6 @@ namespace EmailService.Repositories
         /// Add sender email address
         /// </summary>
         /// <param name="from"></param>
-        /// <returns></returns>
         public IEmailRepository From(string from)
         {
             Message.From = new EmailAddress(from);
@@ -132,7 +125,6 @@ namespace EmailService.Repositories
         /// <summary>
         /// Send mail message
         /// </summary>
-        /// <returns></returns>
         public bool Send()
         {
             client.SendEmailAsync(Message);
@@ -143,7 +135,6 @@ namespace EmailService.Repositories
         /// Add email subject
         /// </summary>
         /// <param name="subject"></param>
-        /// <returns></returns>
         public IEmailRepository Subject(string subject)
         {
             Message.SetSubject(subject);
@@ -154,10 +145,9 @@ namespace EmailService.Repositories
         /// Add To email recipients
         /// </summary>
         /// <param name="to"></param>
-        /// <returns></returns>
         public IEmailRepository To(IEnumerable<string> to)
         {
-            if (to != null)
+            if (to?.Count() > 0)
             {
                 Message.AddTos(to.Select(x => new EmailAddress(x)).ToList());
             }
@@ -168,13 +158,16 @@ namespace EmailService.Repositories
         /// <summary>
         /// Flag email as high priority
         /// </summary>
-        /// <returns></returns>
         public IEmailRepository HighPriority() => this;
 
         /// <summary>
         /// Flag email as low priority
         /// </summary>
-        /// <returns></returns>
         public IEmailRepository LowPriority() => this;
+
+        /// <summary>
+        /// Dispose of dependencies
+        /// </summary>
+        public void Dispose() => Message = null;
     }
 }

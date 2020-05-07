@@ -37,7 +37,6 @@ namespace EmailService.Repositories
         /// Add To email recipients
         /// </summary>
         /// <param name="to"></param>
-        /// <returns></returns>
         public IEmailRepository To(IEnumerable<string> to)
         {
             to?.ForEach(i => Message.To.Add(i));
@@ -48,7 +47,6 @@ namespace EmailService.Repositories
         /// Add Cc emails recipients
         /// </summary>
         /// <param name="cc"></param>
-        /// <returns></returns>
         public IEmailRepository Cc(IEnumerable<string> cc)
         {
             cc?.ForEach(i => Message.CC.Add(i));
@@ -60,7 +58,6 @@ namespace EmailService.Repositories
         /// Add Bcc emails recipients
         /// </summary>
         /// <param name="bcc"></param>
-        /// <returns></returns>
         public IEmailRepository Bcc(IEnumerable<string> bcc)
         {
             bcc?.ForEach(i => Message.Bcc.Add(i));
@@ -72,10 +69,14 @@ namespace EmailService.Repositories
         /// Add sender email address
         /// </summary>
         /// <param name="from"></param>
-        /// <returns></returns>
         public IEmailRepository From(string from)
         {
             Message.From = new MailAddress(from);
+
+            Message.Bcc.Clear();
+            Message.CC.Clear();
+            Message.To.Clear();
+
             return this;
         }
 
@@ -83,7 +84,6 @@ namespace EmailService.Repositories
         /// Add email subject
         /// </summary>
         /// <param name="subject"></param>
-        /// <returns></returns>
         public IEmailRepository Subject(string subject)
         {
             Message.Subject = subject;
@@ -94,7 +94,6 @@ namespace EmailService.Repositories
         /// Add email body
         /// </summary>
         /// <param name="body"></param>
-        /// <returns></returns>
         public IEmailRepository Body(string body)
         {
             Message.Body = body;
@@ -104,7 +103,6 @@ namespace EmailService.Repositories
         /// <summary>
         /// Flag email as high priority
         /// </summary>
-        /// <returns></returns>
         public IEmailRepository HighPriority()
         {
             Message.Priority = MailPriority.High;
@@ -114,7 +112,6 @@ namespace EmailService.Repositories
         /// <summary>
         /// Flag email as low priority
         /// </summary>
-        /// <returns></returns>
         public IEmailRepository LowPriority()
         {
             Message.Priority = MailPriority.Low;
@@ -125,7 +122,6 @@ namespace EmailService.Repositories
         /// Include an attachment to the email
         /// </summary>
         /// <param name="attachment"></param>
-        /// <returns></returns>
         public IEmailRepository Attach(model.Attachment attachment)
         {
             if (attachment != null)
@@ -140,7 +136,6 @@ namespace EmailService.Repositories
         /// <summary>
         /// Add html flag on message
         /// </summary>
-        /// <returns></returns>
         public IEmailRepository BodyAsHtml()
         {
             bodyIsHtml = true;
@@ -150,7 +145,6 @@ namespace EmailService.Repositories
         /// <summary>
         /// Remove html flag on message
         /// </summary>
-        /// <returns></returns>
         public IEmailRepository BodyAsPlainText()
         {
             bodyIsHtml = false;
@@ -160,7 +154,6 @@ namespace EmailService.Repositories
         /// <summary>
         /// Send mail message
         /// </summary>
-        /// <returns></returns>
         public bool Send()
         {
             Message.IsBodyHtml = bodyIsHtml;
@@ -173,8 +166,15 @@ namespace EmailService.Repositories
         /// </summary>
         public void Dispose()
         {
-            client?.Dispose();
-            Message?.Dispose();
+            if (client != null)
+            {
+                client?.Dispose();
+            }
+
+            if (Message != null)
+            {
+                Message?.Dispose();
+            }
         }
     }
 }
