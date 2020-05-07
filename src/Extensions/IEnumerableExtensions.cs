@@ -13,8 +13,11 @@ namespace EmailService.Extensions
         /// <param name="action"></param>
         public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
         {
-            foreach (var item in items)
-                action(item);
+            if (items is IEnumerable<T>)
+            {
+                foreach (var item in items)
+                    action(item);
+            }
         }
     }
 }
