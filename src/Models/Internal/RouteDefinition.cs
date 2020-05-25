@@ -1,4 +1,4 @@
-﻿namespace EmailService.Entities
+﻿namespace EmailService.Models
 {
     public class RouteDefinition
     {

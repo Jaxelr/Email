@@ -1,5 +1,6 @@
-﻿using Carter;
-using EmailService.Entities.Operations;
+﻿using System.Threading.Tasks;
+using Carter;
+using EmailService.Models.Operations;
 using EmailService.Extensions;
 using EmailService.Modules.Metadata;
 using EmailService.Repositories;
@@ -14,7 +15,9 @@ namespace EmailService.Modules
             {
                 return res.ExecHandler<PostEmailRequest, PostEmailResponse>(req, (request) =>
                 {
-                    bool successfullyExecuted = repository.From(request.From)
+                    var task = Task.Run(() =>
+                    {
+                        return repository.From(request.From)
                                                     .To(request.To)
                                                     .Cc(request.Cc)
                                                     .Bcc(request.Bcc)
@@ -23,10 +26,11 @@ namespace EmailService.Modules
                                                     .Attach(request.Attachment)
                                                     .BodyAsHtml()
                                                     .Send();
+                    });
 
                     return new PostEmailResponse()
                     {
-                        Successful = successfullyExecuted,
+                        Successful = task.Result,
                         Message = $"Message sent at: {System.DateTime.Now}"
                     };
                 });

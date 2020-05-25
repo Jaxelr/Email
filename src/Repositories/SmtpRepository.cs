@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net.Mail;
 using EmailService.Extensions;
-using model = EmailService.Entities.Models;
+using model = EmailService.Models;
 
 namespace EmailService.Repositories
 {

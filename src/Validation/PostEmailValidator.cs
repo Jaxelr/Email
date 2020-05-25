@@ -1,4 +1,4 @@
-﻿using EmailService.Entities.Operations;
+﻿using EmailService.Models.Operations;
 using FluentValidation;
 
 namespace EmailService.Validation

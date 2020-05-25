@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EmailService.Entities.Models
+namespace EmailService.Models
 {
     public class Email
     {

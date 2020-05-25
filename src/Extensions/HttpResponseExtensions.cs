@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Carter.ModelBinding;
 using Carter.Response;
+using Email.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace EmailService.Extensions
@@ -33,7 +34,7 @@ namespace EmailService.Extensions
             catch (Exception ex)
             {
                 res.StatusCode = 500;
-                await res.Negotiate(ex.Message).ConfigureAwait(false);
+                await res.Negotiate(new FailedResponse(ex)).ConfigureAwait(false);
             }
         }
 
@@ -73,7 +74,7 @@ namespace EmailService.Extensions
             catch (Exception ex)
             {
                 res.StatusCode = 500;
-                await res.Negotiate(ex.Message).ConfigureAwait(false);
+                await res.Negotiate(new FailedResponse(ex)).ConfigureAwait(false);
             }
         }
     }

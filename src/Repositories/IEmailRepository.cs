@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmailService.Entities.Models;
+using EmailService.Models;
 
 namespace EmailService.Repositories
 {
