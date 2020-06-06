@@ -1,4 +1,5 @@
 ﻿using Carter.OpenApi;
+using Email.Models;
 using EmailService.Models.Operations;
 
 namespace EmailService.Modules.Metadata
@@ -15,6 +16,12 @@ namespace EmailService.Modules.Metadata
                 Code = 200,
                 Description = "A response if it was successful and a reason why it wasnt.",
                 Response = typeof(PostEmailResponse),
+            },
+            new RouteMetaDataResponse
+            {
+                Code = 500,
+                Description = "A response if an internal server error is detected.",
+                Response = typeof(FailedResponse),
             }
         };
 
