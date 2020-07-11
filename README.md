@@ -1,6 +1,6 @@
 # Email Service
 
-This service allows the user to use an smtp (or sendgrid) configuration and send emails by http requests. 
+This service allows the user to use a local smtp server (or sendgrid)  and send emails by http requests. 
 
 ## Configurations
 
