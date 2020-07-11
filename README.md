@@ -1,13 +1,13 @@
-# Email Service
+# Email Api
 
-This service allows the user to use a local smtp server (or sendgrid)  and send emails by http requests. 
+This service allows the user to use a local smtp server (or sendgrid)  and send emails by http requests. It is build on top of .netcore and the Carter library for routing management. It includes a Swagger UI page for discoverability and it is configured to log execution, so that it is easily switchable for any context needed. 
 
 ## Configurations
 
 Some configurations that are included on the appsettings are:
 
 1. SmtpServer - Required: the smtp server to be used for emailing.
-1. Addresses - Optional: if left empty the current host is selected. Urls defined here, will be used as endpoints on the open ui page for validation.
+1. Addresses - Optional: if left empty the current host is selected. Urls defined here, will be used as endpoints on the open ui page for validation. If the service is running behind IIS this is needed since kestrel proxies the requests over to IIS
 1. Route Definition - Required: These values are attached to the openapi declaration and are needed for the defined metadata info
    1. Route Prefix - The path where the ui will be shown.
    1. Swagger Endpoint - The path where the openapi json metadata will be found.
