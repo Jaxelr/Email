@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using model = EmailService.Models;
@@ -10,27 +11,37 @@ namespace EmailService.Repositories
     public class SendGridRepository : IEmailRepository
     {
         private readonly SendGridClient client;
+        private readonly ILogger<SendGridRepository> logger;
         public SendGridMessage Message;
         private bool bodyIsHtml = true;
 
         /// <summary>
-        /// Initialize a SendGridRepository class
+        /// Initializes the SendgridRepository with logging and the ApiKey
         /// </summary>
-        /// <param name="apiKey"></param>
-        public SendGridRepository(string apiKey)
+        /// <param name="settings"></param>
+        /// <param name="logger"></param>
+        public SendGridRepository(model.AppSettings settings, ILogger<SendGridRepository> logger) : this(settings, new SendGridMessage(), logger)
         {
-            client = new SendGridClient(apiKey);
         }
 
         /// <summary>
         /// Initialize a SendGridRepository class with a mail message
         /// </summary>
-        /// <param name="apiKey"></param>
+        /// <param name="settings"></param>
         /// <param name="message"></param>
-        public SendGridRepository(string apiKey, SendGridMessage message)
+        /// <param name="logger"></param>
+        public SendGridRepository(model.AppSettings settings, SendGridMessage message, ILogger<SendGridRepository> logger)
         {
-            client = new SendGridClient(apiKey);
-            Message = message;
+            this.logger = logger;
+            try
+            {
+                client = new SendGridClient(settings.ApiKey);
+                Message = message;
+            }
+            catch (Exception ex)
+            {
+                logger.LogCritical(ex, "Error configuring the Sendgrid Client");
+            }
         }
 
         /// <summary>
@@ -127,7 +138,16 @@ namespace EmailService.Repositories
         /// </summary>
         public bool Send()
         {
-            client.SendEmailAsync(Message);
+            try
+            {
+                client.SendEmailAsync(Message);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error sending email");
+                return false;
+            }
+
             return true;
         }
 
