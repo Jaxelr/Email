@@ -42,10 +42,6 @@ namespace EmailService
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(settings); //typeof(AppSettings)
-
-            services.AddTransient<IEmailRepository>(_ => new SmtpRepository(settings.SmtpServer));
-
             //Change Cors as needed.
             services.AddCors(options =>
             {
@@ -59,8 +55,6 @@ namespace EmailService
                 });
             });
 
-            services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
-
             services.AddLogging(opt =>
             {
                 opt.ClearProviders();
@@ -68,6 +62,11 @@ namespace EmailService
                 opt.AddDebug();
                 opt.AddConfiguration(Configuration.GetSection("Logging"));
             });
+
+            services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
+
+            services.AddSingleton(settings); //typeof(AppSettings)
+            services.AddSingleton<IEmailRepository, SmtpRepository>();
 
             //HealthChecks
             services.AddHealthChecks();

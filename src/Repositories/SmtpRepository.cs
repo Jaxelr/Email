@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
 using EmailService.Extensions;
+using Microsoft.Extensions.Logging;
+
 using model = EmailService.Models;
 
 namespace EmailService.Repositories
@@ -9,28 +12,38 @@ namespace EmailService.Repositories
     public class SmtpRepository : IEmailRepository
     {
         private readonly SmtpClient client;
+        private readonly ILogger<SmtpRepository> logger;
         public MailMessage Message;
         private bool bodyIsHtml = true;
 
         /// <summary>
-        /// Initialize an SmtpRepository class
+        /// Initializes the SmtpRepository with the server
         /// </summary>
-        /// <param name="smtpServer"></param>
-        public SmtpRepository(string smtpServer)
+        /// <param name="settings"></param>
+        /// <param name="logger"></param>
+        public SmtpRepository(model.AppSettings settings, ILogger<SmtpRepository> logger) : this(settings, new MailMessage(), logger)
         {
-            client = new SmtpClient(smtpServer);
-            Message = new MailMessage();
         }
 
         /// <summary>
-        /// Initialize an SmtpRepository class with a mail nessage
+        /// Initialize an SmtpRepository class with a mail message
         /// </summary>
-        /// <param name="smtpServer"></param>
+        /// <param name="settings"></param>
         /// <param name="message"></param>
-        public SmtpRepository(string smtpServer, MailMessage message)
+        /// <param name="logger"></param>
+        public SmtpRepository(model.AppSettings settings, MailMessage message, ILogger<SmtpRepository> logger)
         {
-            client = new SmtpClient(smtpServer);
-            Message = message;
+            this.logger = logger;
+
+            try
+            {
+                client = new SmtpClient(settings.SmtpServer);
+                Message = message;
+            }
+            catch (Exception ex)
+            {
+                logger.LogCritical(ex, "Error configuring Stmp Client");
+            }
         }
 
         /// <summary>
@@ -156,8 +169,17 @@ namespace EmailService.Repositories
         /// </summary>
         public bool Send()
         {
-            Message.IsBodyHtml = bodyIsHtml;
-            client.Send(Message);
+            try
+            {
+                Message.IsBodyHtml = bodyIsHtml;
+                client.SendMailAsync(Message);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error sending email");
+                return false;
+            }
+
             return true;
         }
 
