@@ -1,4 +1,6 @@
-# Email Api
+# Email Api 
+
+![.NET Core](https://github.com/Jaxelr/Email/workflows/.NET%20Core/badge.svg)
 
 This service allows the user to use a local smtp server (or using sendgrid service) and send emails by http requests. It is build on top of .netcore and the Carter library for routing management. It includes a Swagger UI page for discoverability and it is configured to log execution, so that it is easily switchable for any context needed. 
 
