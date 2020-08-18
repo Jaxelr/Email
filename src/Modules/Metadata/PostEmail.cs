@@ -1,5 +1,5 @@
 ﻿using Carter.OpenApi;
-using Email.Models;
+using EmailService.Models;
 using EmailService.Models.Operations;
 
 namespace EmailService.Modules.Metadata

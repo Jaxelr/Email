@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Carter.ModelBinding;
 using Carter.Response;
-using Email.Models;
+using EmailService.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace EmailService.Extensions
