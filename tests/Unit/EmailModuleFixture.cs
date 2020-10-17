@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using EmailService;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
@@ -11,7 +10,7 @@ using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Api.Test.Unit
+namespace EmailService.Tests.Unit
 {
     public class EmailModuleFixture : IDisposable
     {
@@ -40,7 +39,7 @@ namespace Api.Test.Unit
         public async Task Email_module_post_email_validation_failed()
         {
             //Arrange
-            var email = new EmailService.Models.Email();
+            var email = new Models.Email();
 
             //Act
             var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email)));
@@ -53,7 +52,7 @@ namespace Api.Test.Unit
         public async Task Email_module_post_email_validation_exception()
         {
             //Arrange
-            var email = new EmailService.Models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
+            var email = new Models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
 
             //Act
             var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email)));
