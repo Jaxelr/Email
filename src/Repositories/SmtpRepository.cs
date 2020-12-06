@@ -188,15 +188,9 @@ namespace EmailService.Repositories
         /// </summary>
         public void Dispose()
         {
-            if (client != null)
-            {
-                client?.Dispose();
-            }
-
-            if (Message != null)
-            {
-                Message?.Dispose();
-            }
+            client?.Dispose();
+            Message?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }
