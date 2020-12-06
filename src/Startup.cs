@@ -23,7 +23,7 @@ namespace EmailService
 
         private const string ServiceName = "Email Service";
 
-        private string Policy => "DefaultPolicy";
+        private static string Policy => "DefaultPolicy";
 
         public Startup(IWebHostEnvironment env)
         {
@@ -72,7 +72,7 @@ namespace EmailService
             services.AddHealthChecks();
         }
 
-        public void Configure(IApplicationBuilder app, AppSettings appSettings)
+        public static void Configure(IApplicationBuilder app, AppSettings appSettings)
         {
             app.UseCors(Policy);
 
@@ -92,7 +92,7 @@ namespace EmailService
             app.UseEndpoints(builder => builder.MapCarter());
         }
 
-        private OpenApiOptions GetOpenApiOptions(AppSettings settings) =>
+        private static OpenApiOptions GetOpenApiOptions(AppSettings settings) =>
         new OpenApiOptions()
         {
             DocumentTitle = ServiceName,

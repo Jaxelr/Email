@@ -188,6 +188,10 @@ namespace EmailService.Repositories
         /// <summary>
         /// Dispose of dependencies
         /// </summary>
-        public void Dispose() => Message = null;
+        public void Dispose()
+        {
+            Message = null;
+            GC.SuppressFinalize(this);
+        }
     }
 }

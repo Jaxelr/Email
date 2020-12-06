@@ -33,6 +33,7 @@ namespace EmailService.Tests.Unit
         {
             client?.Dispose();
             server?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         [Fact]
