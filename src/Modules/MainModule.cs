@@ -8,9 +8,9 @@ namespace EmailService.Modules
     {
         public MainModule(AppSettings app)
         {
-            Get("/", (_, res) =>
+            Get("/", (ctx) =>
             {
-                res.Redirect(app.RouteDefinition.RoutePrefix);
+                ctx.Response.Redirect(app.RouteDefinition.RoutePrefix);
 
                 return Task.CompletedTask;
             });
