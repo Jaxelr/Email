@@ -62,9 +62,9 @@ namespace EmailService.Repositories
         /// Add Bcc emails recipients
         /// </summary>
         /// <param name="bcc"></param>
-        public IEmailRepository Bcc(IEnumerable<string> bcc)
+        public IEmailRepository Bcc(ICollection<string> bcc)
         {
-            if (bcc?.Count() > 0)
+            if (bcc?.Count > 0)
             {
                 Message.AddBccs(bcc.Select(x => new EmailAddress(x)).ToList());
             }
@@ -112,9 +112,9 @@ namespace EmailService.Repositories
         /// Add Cc emails recipients
         /// </summary>
         /// <param name="cc"></param>
-        public IEmailRepository Cc(IEnumerable<string> cc)
+        public IEmailRepository Cc(ICollection<string> cc)
         {
-            if (cc?.Count() > 0)
+            if (cc?.Count > 0)
             {
                 Message.AddCcs(cc.Select(x => new EmailAddress(x)).ToList());
             }
@@ -165,9 +165,9 @@ namespace EmailService.Repositories
         /// Add To email recipients
         /// </summary>
         /// <param name="to"></param>
-        public IEmailRepository To(IEnumerable<string> to)
+        public IEmailRepository To(ICollection<string> to)
         {
-            if (to?.Count() > 0)
+            if (to?.Count > 0)
             {
                 Message.AddTos(to.Select(x => new EmailAddress(x)).ToList());
             }

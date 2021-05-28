@@ -50,7 +50,7 @@ namespace EmailService.Repositories
         /// Add To email recipients
         /// </summary>
         /// <param name="to"></param>
-        public IEmailRepository To(IEnumerable<string> to)
+        public IEmailRepository To(ICollection<string> to)
         {
             to?.ForEach(i => Message.To.Add(i));
             return this;
@@ -60,7 +60,7 @@ namespace EmailService.Repositories
         /// Add Cc emails recipients
         /// </summary>
         /// <param name="cc"></param>
-        public IEmailRepository Cc(IEnumerable<string> cc)
+        public IEmailRepository Cc(ICollection<string> cc)
         {
             cc?.ForEach(i => Message.CC.Add(i));
 
@@ -71,7 +71,7 @@ namespace EmailService.Repositories
         /// Add Bcc emails recipients
         /// </summary>
         /// <param name="bcc"></param>
-        public IEmailRepository Bcc(IEnumerable<string> bcc)
+        public IEmailRepository Bcc(ICollection<string> bcc)
         {
             bcc?.ForEach(i => Message.Bcc.Add(i));
 

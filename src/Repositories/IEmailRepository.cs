@@ -16,19 +16,19 @@ namespace EmailService.Repositories
         /// Add To email recipients
         /// </summary>
         /// <param name="to"></param>
-        IEmailRepository To(IEnumerable<string> to);
+        IEmailRepository To(ICollection<string> to);
 
         /// <summary>
         /// Add Cc emails recipients
         /// </summary>
         /// <param name="cc"></param>
-        IEmailRepository Cc(IEnumerable<string> cc);
+        IEmailRepository Cc(ICollection<string> cc);
 
         /// <summary>
         /// Add Bcc emails recipients
         /// </summary>
         /// <param name="bcc"></param>
-        IEmailRepository Bcc(IEnumerable<string> bcc);
+        IEmailRepository Bcc(ICollection<string> bcc);
 
         /// <summary>
         /// Add email subject
