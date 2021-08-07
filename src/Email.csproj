@@ -18,7 +18,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="5.0.8" />
     <PackageReference Include="Sendgrid" Version="9.24.1" />
-    <PackageReference Include="SwashBuckle.AspNetCore.SwaggerUi" Version="6.1.4" />
+    <PackageReference Include="SwashBuckle.AspNetCore.SwaggerUi" Version="6.1.5" />
   </ItemGroup>
 
   <ItemGroup>
