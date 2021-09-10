@@ -15,7 +15,6 @@ namespace EmailService.Extensions
         /// <typeparam name="TOut"></typeparam>
         /// <param name="res">An http response that will be populated</param>
         /// <param name="handler">A func handler that will be validated and executed</param>
-        /// <returns></returns>
         public static async Task ExecHandler<TOut>(this HttpResponse res, Func<TOut> handler)
         {
             try
@@ -46,7 +45,6 @@ namespace EmailService.Extensions
         /// <param name="res">An http response that will be populated</param>
         /// <param name="req">An http request that will be binded and validated</param>
         /// <param name="handler">A func handler that will be validated and executed</param>
-        /// <returns></returns>
         public static async Task ExecHandler<TIn, TOut>(this HttpResponse res, HttpRequest req, Func<TIn, TOut> handler)
         {
             try
