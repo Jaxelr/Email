@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Xunit;
+using models = EmailService.Models;
 
 namespace EmailService.Tests.Unit
 {
@@ -40,7 +41,7 @@ namespace EmailService.Tests.Unit
         public async Task Email_module_post_email_validation_failed()
         {
             //Arrange
-            var email = new Models.Email();
+            var email = new models.Email();
 
             //Act
             var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email)));
@@ -53,7 +54,7 @@ namespace EmailService.Tests.Unit
         public async Task Email_module_post_email_validation_exception()
         {
             //Arrange
-            var email = new Models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
+            var email = new models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
 
             //Act
             var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email)));
