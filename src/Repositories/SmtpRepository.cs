@@ -89,6 +89,7 @@ namespace EmailService.Repositories
             Message.Bcc.Clear();
             Message.CC.Clear();
             Message.To.Clear();
+            Message.Attachments.Clear();
 
             return this;
         }
