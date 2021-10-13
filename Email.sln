@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email", "src\Email.csproj", "{990C30E7-F5A2-4AD8-9F80-BD0D18E9AD4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email", "src\Email\Email.csproj", "{990C30E7-F5A2-4AD8-9F80-BD0D18E9AD4C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".SolutionItems", ".SolutionItems", "{C62A591C-F4B1-47B6-B078-A19D84A196C8}"
 	ProjectSection(SolutionItems) = preProject
@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".SolutionItems", ".Solution
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailTests", "tests\EmailTests.csproj", "{CD1C03A0-B83C-43A9-89F5-9A7806DA07AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email.Models", "Email.Models\Email.Models.csproj", "{635AF85A-B995-4A55-B637-AE2257A631EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email.Models", "src\Email.Models\Email.Models.csproj", "{635AF85A-B995-4A55-B637-AE2257A631EC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C5AE266B-3EE3-4C14-A800-765CB84B0F0F}"
 EndProject
