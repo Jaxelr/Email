@@ -51,7 +51,7 @@ namespace EmailService.Tests.Unit
         }
 
         [Fact]
-        public async Task Email_module_post_email_validation_exception()
+        public async Task Email_module_post_email_validation_Ok()
         {
             //Arrange
             var email = new models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
