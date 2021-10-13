@@ -1,7 +1,7 @@
-﻿using EmailService.Models.Operations;
+﻿using Email.Models.Operations;
 using FluentValidation;
 
-namespace EmailService.Validation
+namespace Email.Validation
 {
     public class PostEmailValidator : AbstractValidator<PostEmailRequest>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmailService.Models
+namespace Email.Models
 {
     public class FailedResponse
     {

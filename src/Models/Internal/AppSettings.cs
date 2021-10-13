@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EmailService.Models
+namespace Email.Models
 {
     public class AppSettings
     {

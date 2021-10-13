@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EmailService.Extensions
+namespace Email.Extensions
 {
     public static class IEnumerableExtensions
     {

@@ -1,8 +1,8 @@
 ﻿using Carter;
-using EmailService.Extensions;
-using EmailService.Models.Operations;
-using EmailService.Modules.Metadata;
-using EmailService.Repositories;
+using Email.Extensions;
+using Email.Models.Operations;
+using Email.Modules.Metadata;
+using Email.Repositories;
 
 namespace EmailService.Modules
 {

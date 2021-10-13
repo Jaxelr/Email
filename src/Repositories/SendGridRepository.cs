@@ -4,9 +4,9 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using model = EmailService.Models;
+using model = Email.Models;
 
-namespace EmailService.Repositories
+namespace Email.Repositories
 {
     public class SendGridRepository : IEmailRepository
     {

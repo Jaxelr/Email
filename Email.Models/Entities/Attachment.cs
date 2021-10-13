@@ -1,4 +1,4 @@
-﻿namespace EmailService.Models
+﻿namespace Email.Models
 {
     public class Attachment
     {

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using EmailService.Models;
+using Email.Models;
 using Carter;
 
 namespace EmailService.Modules

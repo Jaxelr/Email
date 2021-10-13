@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EmailService.Models.Operations
+namespace Email.Models.Operations
 {
     public class PostEmailRequest
     {

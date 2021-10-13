@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>EmailService.Models</RootNamespace>
+    <RootNamespace>Email.Models</RootNamespace>
+    <AssemblyName>EmailService.Models</AssemblyName>
   </PropertyGroup>
 
 </Project>

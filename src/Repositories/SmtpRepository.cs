@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
-using EmailService.Extensions;
+using Email.Extensions;
 using Microsoft.Extensions.Logging;
+using model = Email.Models;
 
-using model = EmailService.Models;
-
-namespace EmailService.Repositories
+namespace Email.Repositories
 {
     public class SmtpRepository : IEmailRepository
     {

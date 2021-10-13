@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmailService.Models;
+using Email.Models;
 
-namespace EmailService.Repositories
+namespace Email.Repositories
 {
     public interface IEmailRepository : IDisposable
     {

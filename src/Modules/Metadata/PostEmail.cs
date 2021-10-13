@@ -1,8 +1,8 @@
 ﻿using Carter.OpenApi;
-using EmailService.Models;
-using EmailService.Models.Operations;
+using Email.Models;
+using Email.Models.Operations;
 
-namespace EmailService.Modules.Metadata
+namespace Email.Modules.Metadata
 {
     public class PostEmail : RouteMetaData
     {

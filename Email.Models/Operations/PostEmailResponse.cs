@@ -1,4 +1,4 @@
-﻿namespace EmailService.Models.Operations
+﻿namespace Email.Models.Operations
 {
     public class PostEmailResponse
     {

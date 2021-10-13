@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using Carter.ModelBinding;
 using Carter.Response;
-using EmailService.Models;
+using Email.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace EmailService.Extensions
+namespace Email.Extensions
 {
     public static class HttpResponseExtensions
     {

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Xunit;
-using models = EmailService.Models;
+using models = Email.Models;
 
 namespace EmailService.Tests.Unit
 {
