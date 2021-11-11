@@ -13,7 +13,7 @@ namespace Email.Extensions
         /// <param name="action"></param>
         public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
         {
-            if (items is IEnumerable<T>)
+            if (items is not null)
             {
                 foreach (var item in items)
                     action(item);
