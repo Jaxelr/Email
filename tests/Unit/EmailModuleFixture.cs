@@ -7,49 +7,48 @@ using Newtonsoft.Json;
 using Xunit;
 using models = Email.Models;
 
-namespace EmailService.Tests.Unit
+namespace EmailService.Tests.Unit;
+
+public class EmailModuleFixture : IDisposable
 {
-    public class EmailModuleFixture : IDisposable
+    private readonly HttpClient client;
+
+    public EmailModuleFixture()
     {
-        private readonly HttpClient client;
+        var server = new WebApplicationFactory<Program>();
 
-        public EmailModuleFixture()
-        {
-            var server = new WebApplicationFactory<Program>();
+        client = server.CreateClient();
+    }
 
-            client = server.CreateClient();
-        }
+    public void Dispose()
+    {
+        client?.Dispose();
+        GC.SuppressFinalize(this);
+    }
 
-        public void Dispose()
-        {
-            client?.Dispose();
-            GC.SuppressFinalize(this);
-        }
+    [Fact]
+    public async Task Email_module_post_email_validation_failed()
+    {
+        //Arrange
+        var email = new models.Email();
 
-        [Fact]
-        public async Task Email_module_post_email_validation_failed()
-        {
-            //Arrange
-            var email = new models.Email();
+        //Act
+        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email)));
 
-            //Act
-            var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email)));
+        //Assert
+        Assert.Equal(HttpStatusCode.UnprocessableEntity, res.StatusCode);
+    }
 
-            //Assert
-            Assert.Equal(HttpStatusCode.UnprocessableEntity, res.StatusCode);
-        }
+    [Fact]
+    public async Task Email_module_post_email_validation_Ok()
+    {
+        //Arrange
+        var email = new models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
 
-        [Fact]
-        public async Task Email_module_post_email_validation_Ok()
-        {
-            //Arrange
-            var email = new models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
+        //Act
+        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email)));
 
-            //Act
-            var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email)));
-
-            //Assert
-            Assert.Equal(HttpStatusCode.OK, res.StatusCode);
-        }
+        //Assert
+        Assert.Equal(HttpStatusCode.OK, res.StatusCode);
     }
 }
