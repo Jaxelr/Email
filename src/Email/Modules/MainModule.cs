@@ -1,18 +1,18 @@
 ﻿using System.Threading.Tasks;
 using Carter;
 using Email.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace EmailService.Modules;
 
-public class MainModule : CarterModule
+public class MainModule : ICarterModule
 {
-    public MainModule(AppSettings app)
-    {
-        Get("/", (ctx) =>
-        {
-            ctx.Response.Redirect(app.RouteDefinition.RoutePrefix);
+    public void AddRoutes(IEndpointRouteBuilder app) => app.MapGet("/", (HttpContext ctx, AppSettings app) =>
+      {
+          ctx.Response.Redirect(app.RouteDefinition.RoutePrefix);
 
-            return Task.CompletedTask;
-        });
-    }
+          return Task.CompletedTask;
+      });
 }

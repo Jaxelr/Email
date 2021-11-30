@@ -42,7 +42,8 @@ builder.Services.AddLogging(opt =>
     opt.AddConfiguration(builder.Configuration.GetSection("Logging"));
 });
 
-builder.Services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
+builder.Services.AddCarter();
+//builder.Services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
 
 builder.Services.AddSingleton(settings); //typeof(AppSettings)
 builder.Services.AddSingleton<IEmailRepository, SmtpRepository>();
@@ -77,13 +78,13 @@ app.UseEndpoints(builder => builder.MapCarter());
 
 app.Run();
 
-static OpenApiOptions GetOpenApiOptions(AppSettings settings) =>
-        new()
-        {
-            DocumentTitle = ServiceName,
-            ServerUrls = settings.ServerUrls,
-            Securities = new Dictionary<string, OpenApiSecurity>()
-        };
+//static OpenApiOptions GetOpenApiOptions(AppSettings settings) =>
+//        new()
+//        {
+//            DocumentTitle = ServiceName,
+//            ServerUrls = settings.ServerUrls,
+//            Securities = new Dictionary<string, OpenApiSecurity>()
+//        };
 
 static Task WriteResponse(HttpContext context, HealthReport report)
 {
