@@ -1,8 +1,7 @@
-﻿namespace Email.Models
+﻿namespace Email.Models;
+
+public class RouteDefinition
 {
-    public class RouteDefinition
-    {
-        public string RoutePrefix { get; set; }
-        public string SwaggerEndpoint { get; set; }
-    }
+    public string RoutePrefix { get; set; }
+    public string SwaggerEndpoint { get; set; }
 }

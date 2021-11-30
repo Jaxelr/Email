@@ -1,14 +1,13 @@
 ﻿using Email.Models.Operations;
 using FluentValidation;
 
-namespace Email.Validation
+namespace Email.Validation;
+
+public class PostEmailValidator : AbstractValidator<PostEmailRequest>
 {
-    public class PostEmailValidator : AbstractValidator<PostEmailRequest>
+    public PostEmailValidator()
     {
-        public PostEmailValidator()
-        {
-            RuleFor(x => x.From).NotEmpty();
-            RuleFor(x => x.To).NotEmpty();
-        }
+        RuleFor(x => x.From).NotEmpty();
+        RuleFor(x => x.To).NotEmpty();
     }
 }

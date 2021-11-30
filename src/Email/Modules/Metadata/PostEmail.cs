@@ -2,15 +2,15 @@
 using Email.Models;
 using Email.Models.Operations;
 
-namespace Email.Modules.Metadata
-{
-    public class PostEmail : RouteMetaData
-    {
-        private const string TagInfo = "Email";
-        private const string DescriptionInfo = "Post an email message to queue for delivery";
+namespace Email.Modules.Metadata;
 
-        public override RouteMetaDataResponse[] Responses { get; } =
-        {
+public class PostEmail : RouteMetaData
+{
+    private const string TagInfo = "Email";
+    private const string DescriptionInfo = "Post an email message to queue for delivery";
+
+    public override RouteMetaDataResponse[] Responses { get; } =
+    {
             new RouteMetaDataResponse
             {
                 Code = 200,
@@ -25,18 +25,17 @@ namespace Email.Modules.Metadata
             }
         };
 
-        public override RouteMetaDataRequest[] Requests { get; } =
-        {
+    public override RouteMetaDataRequest[] Requests { get; } =
+    {
             new RouteMetaDataRequest
             {
                 Request = typeof(PostEmailRequest),
             }
         };
 
-        public override string Description => DescriptionInfo;
+    public override string Description => DescriptionInfo;
 
-        public override string Tag => TagInfo;
+    public override string Tag => TagInfo;
 
-        public override string OperationId => nameof(PostEmail);
-    }
+    public override string OperationId => nameof(PostEmail);
 }

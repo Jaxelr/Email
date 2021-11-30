@@ -1,19 +1,18 @@
 ﻿using System.Threading.Tasks;
-using Email.Models;
 using Carter;
+using Email.Models;
 
-namespace EmailService.Modules
+namespace EmailService.Modules;
+
+public class MainModule : CarterModule
 {
-    public class MainModule : CarterModule
+    public MainModule(AppSettings app)
     {
-        public MainModule(AppSettings app)
+        Get("/", (ctx) =>
         {
-            Get("/", (ctx) =>
-            {
-                ctx.Response.Redirect(app.RouteDefinition.RoutePrefix);
+            ctx.Response.Redirect(app.RouteDefinition.RoutePrefix);
 
-                return Task.CompletedTask;
-            });
-        }
+            return Task.CompletedTask;
+        });
     }
 }
