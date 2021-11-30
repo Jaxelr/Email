@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Email.Models</RootNamespace>
     <AssemblyName>EmailService.Models</AssemblyName>
+    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
 
 </Project>

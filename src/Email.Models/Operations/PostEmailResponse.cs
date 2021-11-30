@@ -1,8 +1,7 @@
-﻿namespace Email.Models.Operations
+﻿namespace Email.Models.Operations;
+
+public class PostEmailResponse
 {
-    public class PostEmailResponse
-    {
-        public bool Successful { get; set; }
-        public string Message { get; set; }
-    }
+    public bool Successful { get; set; }
+    public string Message { get; set; }
 }
