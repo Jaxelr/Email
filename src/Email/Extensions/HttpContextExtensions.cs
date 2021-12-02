@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Email.Extensions;
 
-public static class HttpResponseExtensions
+public static class HttpContextExtensions
 {
     /// <summary>
     /// Encapsulate execution of handler with the corresponding validation logic
