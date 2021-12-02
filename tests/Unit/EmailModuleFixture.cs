@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
@@ -12,6 +13,7 @@ namespace EmailService.Tests.Unit;
 public class EmailModuleFixture : IDisposable
 {
     private readonly HttpClient client;
+    const string ApplicationJson = "application/json";
 
     public EmailModuleFixture()
     {
@@ -33,7 +35,7 @@ public class EmailModuleFixture : IDisposable
         var email = new models.Email();
 
         //Act
-        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email)));
+        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson));
 
         //Assert
         Assert.Equal(HttpStatusCode.UnprocessableEntity, res.StatusCode);
@@ -46,7 +48,7 @@ public class EmailModuleFixture : IDisposable
         var email = new models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
 
         //Act
-        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email)));
+        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson));
 
         //Assert
         Assert.Equal(HttpStatusCode.OK, res.StatusCode);
