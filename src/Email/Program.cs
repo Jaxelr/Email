@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Carter;
+using Carter.OpenApi;
 using Email.Models;
 using Email.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Linq;
 
 const string ServiceName = "Email Service";
@@ -42,8 +43,28 @@ builder.Services.AddLogging(opt =>
     opt.AddConfiguration(builder.Configuration.GetSection("Logging"));
 });
 
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Description = ServiceName,
+        Version = "v1"
+    });
+
+    options.DocInclusionPredicate((_, description) =>
+    {
+        foreach (object metaData in description.ActionDescriptor.EndpointMetadata)
+        {
+            if (metaData is IIncludeOpenApi)
+            {
+                return true;
+            }
+        }
+        return false;
+    });
+});
+
 builder.Services.AddCarter();
-//builder.Services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
 
 builder.Services.AddSingleton(settings); //typeof(AppSettings)
 builder.Services.AddSingleton<IEmailRepository, SmtpRepository>();
@@ -63,28 +84,17 @@ if (builder.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseSwaggerUI(opt =>
-{
-    opt.RoutePrefix = settings.RouteDefinition.RoutePrefix;
-    opt.SwaggerEndpoint(settings.RouteDefinition.SwaggerEndpoint, ServiceName);
-});
-
 app.UseHealthChecks("/healthcheck", new HealthCheckOptions()
 {
     ResponseWriter = WriteResponse
 });
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseEndpoints(builder => builder.MapCarter());
 
 app.Run();
-
-//static OpenApiOptions GetOpenApiOptions(AppSettings settings) =>
-//        new()
-//        {
-//            DocumentTitle = ServiceName,
-//            ServerUrls = settings.ServerUrls,
-//            Securities = new Dictionary<string, OpenApiSecurity>()
-//        };
 
 static Task WriteResponse(HttpContext context, HealthReport report)
 {
