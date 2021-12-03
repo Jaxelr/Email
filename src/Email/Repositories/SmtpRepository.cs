@@ -62,7 +62,6 @@ public class SmtpRepository : IEmailRepository
     public IEmailRepository Cc(ICollection<string> cc)
     {
         cc?.ForEach(i => Message.CC.Add(i));
-
         return this;
     }
 
@@ -73,7 +72,6 @@ public class SmtpRepository : IEmailRepository
     public IEmailRepository Bcc(ICollection<string> bcc)
     {
         bcc?.ForEach(i => Message.Bcc.Add(i));
-
         return this;
     }
 
