@@ -11,7 +11,7 @@ public class MainModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app) => app.MapGet("/", (HttpContext ctx, AppSettings app) =>
       {
-          ctx.Response.Redirect(app.RouteDefinition.RoutePrefix);
+          ctx.Response.Redirect(app.RouteDefinition.RouteSuffix);
 
           return Task.CompletedTask;
       });
