@@ -129,7 +129,6 @@ public class SendGridRepository : IEmailRepository
     public IEmailRepository From(string from)
     {
         Message.From = new EmailAddress(from);
-
         return this;
     }
 
@@ -141,6 +140,7 @@ public class SendGridRepository : IEmailRepository
         try
         {
             client.SendEmailAsync(Message);
+            Message = null;
         }
         catch (Exception ex)
         {

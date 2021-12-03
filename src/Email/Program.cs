@@ -69,7 +69,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddCarter();
 
 builder.Services.AddSingleton(settings); //typeof(AppSettings)
-builder.Services.AddSingleton<IEmailRepository, SmtpRepository>();
+builder.Services.AddSingleton<IEmailRepository, SmtpRepository>(); //Switchable with the Sendgrid Repository
 
 //HealthChecks
 builder.Services.AddHealthChecks();
