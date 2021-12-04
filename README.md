@@ -56,6 +56,6 @@ This project depends on net 5.0. The following oss libraries are used on this re
 
 - [Carter](https://github.com/CarterCommunity/Carter)
 - [Xunit](https://github.com/xunit/xunit)
-- [Swashbuckle.AspnetCore](https://github.com/domaindrivendev/Swashbuckle)
+- [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle)
 - [Sendgrid](https://github.com/sendgrid/sendgrid-csharp)
 - [NSubstitute](https://github.com/nsubstitute/NSubstitute)
