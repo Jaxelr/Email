@@ -34,8 +34,7 @@ The current appsettings.json can be configured manually:
       ""
     ],
     "RouteDefinition": {
-      "RoutePrefix": "openapi/ui",
-      "SwaggerEndpoint": "/openapi"
+      "RouteSuffix": "swagger"
     }
   }
 }
@@ -52,7 +51,7 @@ The OpenApi version used is Version 3.0.0
 
 ## Dependencies & Libraries
 
-This project depends on net 5.0. The following oss libraries are used on this repo as dependencies:
+This project depends on net 6.0. The following oss libraries are used on this repo as dependencies:
 
 - [Carter](https://github.com/CarterCommunity/Carter)
 - [Xunit](https://github.com/xunit/xunit)
