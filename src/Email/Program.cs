@@ -47,10 +47,10 @@ builder.Services.AddLogging(opt =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo
+    options.SwaggerDoc(settings.RouteDefinition.Version, new OpenApiInfo
     {
         Description = ServiceName,
-        Version = "v1"
+        Version = settings.RouteDefinition.Version
     });
 
     options.DocInclusionPredicate((_, description) =>
