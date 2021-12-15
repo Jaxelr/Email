@@ -12,6 +12,9 @@ namespace EmailService.Modules;
 
 public class EmailModule : ICarterModule
 {
+    private const string ModuleTag = "Email";
+    private const string ApplicationJson = "application/json";
+
     public void AddRoutes(IEndpointRouteBuilder app) =>
     app.MapPost("/Email", (HttpContext ctx, PostEmailRequest email, IEmailRepository repository) =>
     {
@@ -35,9 +38,10 @@ public class EmailModule : ICarterModule
         });
     })
     .Produces<PostEmailResponse>(200)
+    .Produces<FailedResponse>(400)
     .Produces<FailedResponse>(500)
     .WithName("PostEmail")
-    .WithTags("Email")
-    .Accepts<PostEmailRequest>("application/json")
+    .WithTags(ModuleTag)
+    .Accepts<PostEmailRequest>(ApplicationJson)
     .IncludeInOpenApi();
 }

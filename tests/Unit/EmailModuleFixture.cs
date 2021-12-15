@@ -13,7 +13,7 @@ namespace EmailService.Tests.Unit;
 public class EmailModuleFixture : IDisposable
 {
     private readonly HttpClient client;
-    const string ApplicationJson = "application/json";
+    private const string ApplicationJson = "application/json";
 
     public EmailModuleFixture()
     {
