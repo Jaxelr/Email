@@ -68,6 +68,11 @@ public static class HttpContextExtensions
             ctx.Response.StatusCode = 200;
             await ctx.Response.Negotiate(response);
         }
+        catch (ArgumentNullException ex)
+        {
+            ctx.Response.StatusCode = 400;
+            await ctx.Response.Negotiate(new FailedResponse(ex));
+        }
         catch (Exception ex)
         {
             ctx.Response.StatusCode = 500;
