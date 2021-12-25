@@ -47,7 +47,7 @@ The endpoint of root/healthcheck for each requests includes a json heartbeat to 
 
 ## OpenApi
 
-The OpenApi version used is Version 3.0.0
+The OpenApi version used is Version 3.0.1
 
 ## Dependencies & Libraries
 
@@ -55,6 +55,6 @@ This project depends on net 6.0. The following oss libraries are used on this re
 
 - [Carter](https://github.com/CarterCommunity/Carter)
 - [Xunit](https://github.com/xunit/xunit)
-- [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle)
+- [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
 - [Sendgrid](https://github.com/sendgrid/sendgrid-csharp)
 - [NSubstitute](https://github.com/nsubstitute/NSubstitute)
