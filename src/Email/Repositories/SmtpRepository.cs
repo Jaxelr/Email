@@ -81,12 +81,10 @@ public class SmtpRepository : IEmailRepository
     /// <param name="from"></param>
     public IEmailRepository From(string from)
     {
-        Message.From = new MailAddress(from);
-
-        Message.Bcc.Clear();
-        Message.CC.Clear();
-        Message.To.Clear();
-        Message.Attachments.Clear();
+        Message = new MailMessage
+        {
+            From = new MailAddress(from)
+        };
 
         return this;
     }

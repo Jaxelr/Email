@@ -128,7 +128,11 @@ public class SendGridRepository : IEmailRepository
     /// <param name="from"></param>
     public IEmailRepository From(string from)
     {
-        Message.From = new EmailAddress(from);
+        Message = new SendGridMessage
+        {
+            From = new EmailAddress(from)
+        };
+
         return this;
     }
 
