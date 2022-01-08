@@ -10,14 +10,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Linq;
+using Serilog;
 
 const string ServiceName = "Email Service";
 const string Policy = "DefaultPolicy";
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((ctx, services, config) =>
+    config
+    .ReadFrom.Configuration(ctx.Configuration)
+    .ReadFrom.Services(services));
 
 var settings = new AppSettings();
 
@@ -33,14 +38,6 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod()
         .AllowAnyHeader();
     });
-});
-
-builder.Services.AddLogging(opt =>
-{
-    opt.ClearProviders();
-    opt.AddConsole();
-    opt.AddDebug();
-    opt.AddConfiguration(builder.Configuration.GetSection("Logging"));
 });
 
 //Swagger
