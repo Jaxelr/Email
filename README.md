@@ -19,13 +19,14 @@ The current appsettings.json can be configured manually:
 
 ```json
 {
-  "Logging": {
-    "LogLevel": {
-      "Default": "Warning"
-    },
-    "Console": {
-      "IncludeScopes": false
-    }
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Console" ],
+    "MinimumLevel": "Information",
+    "WriteTo": [
+      { "Name": "Console" }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+    "AllowedHosts": "*"
   },
   "AppSettings": {
     "SmtpServer": "<SmtpServer>",
@@ -56,5 +57,6 @@ This project depends on net 6.0. The following oss libraries are used on this re
 - [Carter](https://github.com/CarterCommunity/Carter)
 - [Xunit](https://github.com/xunit/xunit)
 - [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
+- [Serilog.AspnetCore](https://github.com/serilog/serilog-aspnetcore/)
 - [Sendgrid](https://github.com/sendgrid/sendgrid-csharp)
 - [NSubstitute](https://github.com/nsubstitute/NSubstitute)
