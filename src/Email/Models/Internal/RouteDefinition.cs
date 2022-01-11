@@ -1,7 +1,7 @@
 ﻿namespace Email.Models;
 
-public class RouteDefinition
+public record RouteDefinition
 {
-    public string RouteSuffix { get; set; }
-    public string Version { get; set; }
+    public string RouteSuffix { get; init; }
+    public string Version { get; init; }
 }
