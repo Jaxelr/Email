@@ -12,8 +12,8 @@ Some configurations that are included on the appsettings are:
 1. ApiKey - Required if using SendGridRepository: the Api key needed to invoke the sendgrid library
 1. Addresses - Optional: if left empty the current host is selected. Urls defined here, will be used as endpoints on the open ui page for validation. If the service is running behind IIS this is needed since kestrel proxies the requests over to IIS
 1. Route Definition - Required: These values are attached to the openapi declaration and are needed for the defined metadata info
-   1. Route Prefix - The path where the ui will be shown
-   1. Swagger Endpoint - The path where the openapi json metadata will be found
+   1. Route Suffix - The path where the swagger json will be shown.
+   1. Version -  The swagger.json file version.
 
 The current appsettings.json can be configured manually:
 
@@ -35,7 +35,8 @@ The current appsettings.json can be configured manually:
       ""
     ],
     "RouteDefinition": {
-      "RouteSuffix": "swagger"
+      "RouteSuffix": "swagger",
+      "Version": "v1"
     }
   }
 }
