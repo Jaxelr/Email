@@ -1,4 +1,5 @@
-﻿using Carter;
+﻿using System.Net;
+using Carter;
 using Carter.OpenApi;
 using Email.Extensions;
 using Email.Models;
@@ -37,9 +38,9 @@ public class EmailModule : ICarterModule
             };
         });
     })
-    .Produces<PostEmailResponse>(200)
-    .Produces<FailedResponse>(400)
-    .Produces<FailedResponse>(500)
+    .Produces<PostEmailResponse>(StatusCodes.Status200OK)
+    .Produces<FailedResponse>(StatusCodes.Status400BadRequest)
+    .Produces<FailedResponse>(StatusCodes.Status500InternalServerError)
     .WithName("PostEmail")
     .WithTags(ModuleTag)
     .Accepts<PostEmailRequest>(ApplicationJson)
