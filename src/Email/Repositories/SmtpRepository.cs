@@ -4,7 +4,7 @@ using System.IO;
 using System.Net.Mail;
 using Email.Extensions;
 using Microsoft.Extensions.Logging;
-using model = Email.Models;
+using Model = Email.Models;
 
 namespace Email.Repositories;
 
@@ -20,7 +20,7 @@ public class SmtpRepository : IEmailRepository
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
-    public SmtpRepository(model.AppSettings settings, ILogger<SmtpRepository> logger) : this(settings, new MailMessage(), logger)
+    public SmtpRepository(Model.AppSettings settings, ILogger<SmtpRepository> logger) : this(settings, new MailMessage(), logger)
     {
     }
 
@@ -30,7 +30,7 @@ public class SmtpRepository : IEmailRepository
     /// <param name="settings"></param>
     /// <param name="message"></param>
     /// <param name="logger"></param>
-    public SmtpRepository(model.AppSettings settings, MailMessage message, ILogger<SmtpRepository> logger)
+    public SmtpRepository(Model.AppSettings settings, MailMessage message, ILogger<SmtpRepository> logger)
     {
         this.logger = logger;
 
@@ -131,7 +131,7 @@ public class SmtpRepository : IEmailRepository
     /// Include an attachment to the email
     /// </summary>
     /// <param name="attachment"></param>
-    public IEmailRepository Attach(model.Attachment attachment)
+    public IEmailRepository Attach(Model.Attachment attachment)
     {
         if (attachment != null)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using Xunit;
-using models = Email.Models;
+using Models = Email.Models;
 
 namespace EmailService.Tests.Unit;
 
@@ -32,7 +32,7 @@ public class EmailModuleFixture : IDisposable
     public async Task Email_module_post_email_validation_failed()
     {
         //Arrange
-        var email = new models.Email();
+        var email = new Models.Email();
 
         //Act
         var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson));
@@ -45,7 +45,7 @@ public class EmailModuleFixture : IDisposable
     public async Task Email_module_post_email_validation_Ok()
     {
         //Arrange
-        var email = new models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
+        var email = new Models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
 
         //Act
         var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson));

@@ -91,7 +91,7 @@ app.UseHealthChecks("/healthcheck", new HealthCheckOptions()
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseEndpoints(builder => builder.MapCarter());
+app.MapCarter();
 
 app.Run();
 

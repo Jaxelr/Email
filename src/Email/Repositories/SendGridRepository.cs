@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using model = Email.Models;
+using Model = Email.Models;
 
 namespace Email.Repositories;
 
@@ -20,7 +20,7 @@ public class SendGridRepository : IEmailRepository
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
-    public SendGridRepository(model.AppSettings settings, ILogger<SendGridRepository> logger) : this(settings, new SendGridMessage(), logger)
+    public SendGridRepository(Model.AppSettings settings, ILogger<SendGridRepository> logger) : this(settings, new SendGridMessage(), logger)
     {
     }
 
@@ -30,7 +30,7 @@ public class SendGridRepository : IEmailRepository
     /// <param name="settings"></param>
     /// <param name="message"></param>
     /// <param name="logger"></param>
-    public SendGridRepository(model.AppSettings settings, SendGridMessage message, ILogger<SendGridRepository> logger)
+    public SendGridRepository(Model.AppSettings settings, SendGridMessage message, ILogger<SendGridRepository> logger)
     {
         this.logger = logger;
         try
@@ -48,7 +48,7 @@ public class SendGridRepository : IEmailRepository
     /// Include an attachment to the email
     /// </summary>
     /// <param name="attachment"></param>
-    public IEmailRepository Attach(model.Attachment attachment)
+    public IEmailRepository Attach(Model.Attachment attachment)
     {
         if (attachment != null)
         {
