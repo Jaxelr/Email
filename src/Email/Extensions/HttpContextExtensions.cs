@@ -27,13 +27,11 @@ public static class HttpContextExtensions
                 return;
             }
 
-            ctx.Response.StatusCode = StatusCodes.Status200OK;
-            await ctx.Response.Negotiate(response);
+            await ctx.NegotiateResponse(response, StatusCodes.Status200OK);
         }
         catch (Exception ex)
         {
-            ctx.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            await ctx.Response.Negotiate(new FailedResponse(ex));
+            await ctx.NegotiateResponse(new FailedResponse(ex), StatusCodes.Status500InternalServerError);
         }
     }
 
@@ -52,8 +50,7 @@ public static class HttpContextExtensions
 
             if (!result.IsValid)
             {
-                ctx.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
-                await ctx.Response.Negotiate(result.GetFormattedErrors());
+                await ctx.NegotiateResponse(result.GetFormattedErrors(), StatusCodes.Status422UnprocessableEntity);
                 return;
             }
 
@@ -65,18 +62,21 @@ public static class HttpContextExtensions
                 return;
             }
 
-            ctx.Response.StatusCode = StatusCodes.Status200OK;
-            await ctx.Response.Negotiate(response);
+            await ctx.NegotiateResponse(response, StatusCodes.Status200OK);
         }
         catch (ArgumentNullException ex)
         {
-            ctx.Response.StatusCode = StatusCodes.Status400BadRequest;
-            await ctx.Response.Negotiate(new FailedResponse(ex));
+            await ctx.NegotiateResponse(new FailedResponse(ex), StatusCodes.Status400BadRequest);
         }
         catch (Exception ex)
         {
-            ctx.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            await ctx.Response.Negotiate(new FailedResponse(ex));
+            await ctx.NegotiateResponse(new FailedResponse(ex), StatusCodes.Status500InternalServerError);
         }
+    }
+
+    private static async Task NegotiateResponse<T>(this HttpContext ctx, T response, int statusCode)
+    {
+        ctx.Response.StatusCode = statusCode;
+        await ctx.Response.Negotiate(response);
     }
 }
