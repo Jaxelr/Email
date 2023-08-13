@@ -10,12 +10,12 @@ using Models = Email.Models;
 
 namespace EmailService.Tests.Unit;
 
-public class EmailModuleFixture : IDisposable
+public class EmailModuleTests : IDisposable
 {
     private readonly HttpClient client;
     private const string ApplicationJson = "application/json";
 
-    public EmailModuleFixture()
+    public EmailModuleTests()
     {
         var server = new WebApplicationFactory<Program>();
 
