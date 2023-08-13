@@ -21,7 +21,7 @@ public static class HttpContextExtensions
         {
             var response = handler();
 
-            if (response == null)
+            if (response is null)
             {
                 ctx.Response.StatusCode = StatusCodes.Status204NoContent;
                 return;
@@ -56,7 +56,7 @@ public static class HttpContextExtensions
 
             var response = handler(@in);
 
-            if (response == null)
+            if (response is null)
             {
                 ctx.Response.StatusCode = StatusCodes.Status204NoContent;
                 return;
