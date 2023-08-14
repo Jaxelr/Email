@@ -42,7 +42,7 @@ public class EmailModuleTests : IDisposable
     }
 
     [Fact]
-    public async Task Email_module_post_email_validation_Ok()
+    public async Task Email_module_post_email_validation_missing_body_failed()
     {
         //Arrange
         var email = new Models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
@@ -51,6 +51,20 @@ public class EmailModuleTests : IDisposable
         var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson));
 
         //Assert
+        Assert.Equal(HttpStatusCode.UnprocessableEntity, res.StatusCode);
+    }
+
+    [Fact]
+    public async Task Email_module_post_email_validation_ok()
+    {
+        //Arrange
+        var email = new Models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" }, Body = "Test", Subject = "Ok" };
+
+        //Act
+        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson));
+
+        //Assert
         Assert.Equal(HttpStatusCode.OK, res.StatusCode);
     }
+
 }
