@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Threading.Tasks;
 using Carter;
 using Carter.OpenApi;
@@ -11,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Linq;
 using Serilog;
 
 const string ServiceName = "Email Service";
@@ -99,11 +99,12 @@ static Task WriteResponse(HttpContext context, HealthReport report)
 {
     context.Response.ContentType = "application/json";
 
-    var json = new JObject(
-                new JProperty("statusCode", report.Status),
-                new JProperty("status", report.Status.ToString()),
-                new JProperty("timelapsed", report.TotalDuration)
-        );
+    var json = new
+    {
+        statusCode = report.Status,
+        status = report.Status.ToString(),
+        timelapsed = report.TotalDuration
+    };
 
-    return context.Response.WriteAsync(json.ToString(Newtonsoft.Json.Formatting.Indented));
+    return context.Response.WriteAsync(JsonSerializer.Serialize(json));
 }
