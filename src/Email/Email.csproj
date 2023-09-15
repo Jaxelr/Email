@@ -6,6 +6,9 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="MSBuild_Logs\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove=".editorconfig" />
   </ItemGroup>
 
