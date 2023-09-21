@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Carter;
+﻿using Carter;
 using Carter.OpenApi;
 using Email.Extensions;
 using Email.Models;
@@ -29,7 +28,8 @@ public class EmailModule : ICarterModule
                                 .Subject(request.Subject)
                                 .Attach(request.Attachment)
                                 .BodyAsHtml()
-                                .Send();
+                                .SendAsync()
+                                .Result;
 
             return new PostEmailResponse()
             {
