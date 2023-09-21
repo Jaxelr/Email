@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Email.Models;
 
 namespace Email.Repositories;
@@ -71,5 +72,5 @@ public interface IEmailRepository : IDisposable
     /// <summary>
     /// Send mail message
     /// </summary>
-    bool Send();
+    Task<bool> SendAsync();
 }

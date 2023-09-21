@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using Email.Extensions;
 using Microsoft.Extensions.Logging;
 using Model = Email.Models;
@@ -163,12 +164,12 @@ public class SmtpRepository : IEmailRepository
     /// <summary>
     /// Send mail message
     /// </summary>
-    public bool Send()
+    public async Task<bool> SendAsync()
     {
         try
         {
             Message.IsBodyHtml = bodyIsHtml;
-            client.SendMailAsync(Message);
+            await client.SendMailAsync(Message);
         }
         catch (Exception ex)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -139,11 +140,11 @@ public class SendGridRepository : IEmailRepository
     /// <summary>
     /// Send mail message
     /// </summary>
-    public bool Send()
+    public async Task<bool> SendAsync()
     {
         try
         {
-            client.SendEmailAsync(Message);
+            await client.SendEmailAsync(Message);
             Message = null;
         }
         catch (Exception ex)
