@@ -73,4 +73,25 @@ public interface IEmailRepository : IDisposable
     /// Send mail message
     /// </summary>
     Task<bool> SendAsync();
+
+    public static async Task Retry(int times, TimeSpan delay, Func<Task> action)
+    {
+        int retries = 0;
+        int backoff = 1;
+
+        while (true)
+        {
+            try
+            {
+                retries++;
+                await action();
+                break;
+            }
+            catch when (retries < times)
+            {
+                await Task.Delay(delay * backoff);
+                backoff += backoff;
+            }
+        }
+    }
 }

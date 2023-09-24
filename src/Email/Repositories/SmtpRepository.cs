@@ -169,7 +169,7 @@ public class SmtpRepository : IEmailRepository
         try
         {
             Message.IsBodyHtml = bodyIsHtml;
-            await client.SendMailAsync(Message);
+            await IEmailRepository.Retry(3, TimeSpan.FromSeconds(1), async () => await client.SendMailAsync(Message));
         }
         catch (Exception ex)
         {
