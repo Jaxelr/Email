@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using SendGrid;
@@ -144,7 +145,7 @@ public class SendGridRepository : IEmailRepository
     {
         try
         {
-            await client.SendEmailAsync(Message);
+            await IEmailRepository.Retry(3, TimeSpan.FromSeconds(1), async () => await client.SendEmailAsync(Message));
             Message = null;
         }
         catch (Exception ex)
