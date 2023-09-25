@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Polly.Retry;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using Model = Email.Models;
@@ -14,6 +14,7 @@ public class SendGridRepository : IEmailRepository
 {
     private readonly SendGridClient client;
     private readonly ILogger<SendGridRepository> logger;
+    private readonly RetryPolicy policy;
     public SendGridMessage Message;
     private bool bodyIsHtml = true;
 
@@ -22,7 +23,7 @@ public class SendGridRepository : IEmailRepository
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
-    public SendGridRepository(Model.AppSettings settings, ILogger<SendGridRepository> logger) : this(settings, new SendGridMessage(), logger)
+    public SendGridRepository(Model.AppSettings settings, ILogger<SendGridRepository> logger, RetryPolicy policy) : this(settings, new SendGridMessage(), logger, policy)
     {
     }
 
@@ -32,9 +33,11 @@ public class SendGridRepository : IEmailRepository
     /// <param name="settings"></param>
     /// <param name="message"></param>
     /// <param name="logger"></param>
-    public SendGridRepository(Model.AppSettings settings, SendGridMessage message, ILogger<SendGridRepository> logger)
+    public SendGridRepository(Model.AppSettings settings, SendGridMessage message, ILogger<SendGridRepository> logger, RetryPolicy policy)
     {
         this.logger = logger;
+        this.policy = policy;
+
         try
         {
             client = new SendGridClient(settings.ApiKey);
@@ -145,7 +148,7 @@ public class SendGridRepository : IEmailRepository
     {
         try
         {
-            await IEmailRepository.Retry(3, TimeSpan.FromSeconds(1), async () => await client.SendEmailAsync(Message));
+            await policy.Execute((async () => await client.SendEmailAsync(Message)));
             Message = null;
         }
         catch (Exception ex)

@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Email.Extensions;
 using Microsoft.Extensions.Logging;
+using Polly.Retry;
 using Model = Email.Models;
 
 namespace Email.Repositories;
@@ -13,6 +14,7 @@ public class SmtpRepository : IEmailRepository
 {
     private readonly SmtpClient client;
     private readonly ILogger<SmtpRepository> logger;
+    private readonly RetryPolicy policy;
     public MailMessage Message;
     private bool bodyIsHtml = true;
 
@@ -21,7 +23,7 @@ public class SmtpRepository : IEmailRepository
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
-    public SmtpRepository(Model.AppSettings settings, ILogger<SmtpRepository> logger) : this(settings, new MailMessage(), logger)
+    public SmtpRepository(Model.AppSettings settings, ILogger<SmtpRepository> logger, RetryPolicy policy) : this(settings, new MailMessage(), logger, policy)
     {
     }
 
@@ -31,9 +33,10 @@ public class SmtpRepository : IEmailRepository
     /// <param name="settings"></param>
     /// <param name="message"></param>
     /// <param name="logger"></param>
-    public SmtpRepository(Model.AppSettings settings, MailMessage message, ILogger<SmtpRepository> logger)
+    public SmtpRepository(Model.AppSettings settings, MailMessage message, ILogger<SmtpRepository> logger, RetryPolicy policy)
     {
         this.logger = logger;
+        this.policy = policy;
 
         try
         {
@@ -169,7 +172,7 @@ public class SmtpRepository : IEmailRepository
         try
         {
             Message.IsBodyHtml = bodyIsHtml;
-            await IEmailRepository.Retry(3, TimeSpan.FromSeconds(1), async () => await client.SendMailAsync(Message));
+            await policy.Execute(async () => await client.SendMailAsync(Message));
         }
         catch (Exception ex)
         {

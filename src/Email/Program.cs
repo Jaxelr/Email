@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Carter;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Polly;
 using Serilog;
 
 const string ServiceName = "Email Service";
@@ -64,6 +66,11 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddCarter();
+
+builder.Services.AddSingleton(builder =>
+{
+    return Polly.Policy.Handle<Exception>().WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+});
 
 builder.Services.AddSingleton(settings); //typeof(AppSettings)
 builder.Services.AddSingleton<IEmailRepository, SmtpRepository>(); //Switchable with the Sendgrid Repository
