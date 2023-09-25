@@ -66,5 +66,4 @@ public class EmailModuleTests : IDisposable
         //Assert
         Assert.Equal(HttpStatusCode.OK, res.StatusCode);
     }
-
 }
