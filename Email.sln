@@ -21,6 +21,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C5AE266B-3EE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6C32FC5D-1925-403A-A084-1A8AFFEFBA88}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{5895BD6B-455D-4388-8965-6C0A3762EE45}"
+	ProjectSection(SolutionItems) = preProject
+		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+		.github\dependabot.yml = .github\dependabot.yml
+		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
+		.github\stale.yml = .github\stale.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C966F605-A7B5-4E94-9595-7E6AD3680581}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{6ECAC52C-9C76-4640-8D1D-4B3B30CB9773}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\BUG_REPORT.md = .github\ISSUE_TEMPLATE\BUG_REPORT.md
+		.github\ISSUE_TEMPLATE\FEATURE_REQUEST.md = .github\ISSUE_TEMPLATE\FEATURE_REQUEST.md
+		.github\ISSUE_TEMPLATE\SUPPORT.md = .github\ISSUE_TEMPLATE\SUPPORT.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +67,9 @@ Global
 		{990C30E7-F5A2-4AD8-9F80-BD0D18E9AD4C} = {C5AE266B-3EE3-4C14-A800-765CB84B0F0F}
 		{CD1C03A0-B83C-43A9-89F5-9A7806DA07AF} = {6C32FC5D-1925-403A-A084-1A8AFFEFBA88}
 		{635AF85A-B995-4A55-B637-AE2257A631EC} = {C5AE266B-3EE3-4C14-A800-765CB84B0F0F}
+		{5895BD6B-455D-4388-8965-6C0A3762EE45} = {C62A591C-F4B1-47B6-B078-A19D84A196C8}
+		{C966F605-A7B5-4E94-9595-7E6AD3680581} = {5895BD6B-455D-4388-8965-6C0A3762EE45}
+		{6ECAC52C-9C76-4640-8D1D-4B3B30CB9773} = {5895BD6B-455D-4388-8965-6C0A3762EE45}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {653B66AD-7081-4DE7-9750-EC8A869AB7F9}
