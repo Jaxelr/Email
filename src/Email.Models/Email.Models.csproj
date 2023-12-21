@@ -5,6 +5,7 @@
     <RootNamespace>Email.Models</RootNamespace>
     <AssemblyName>EmailService.Models</AssemblyName>
     <LangVersion>Latest</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
 </Project>
