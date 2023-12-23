@@ -51,7 +51,7 @@ public class SendGridRepository : IEmailRepository
     {
         if (attachment is { })
         {
-            Message?.AddAttachment(attachment.Name, Convert.ToBase64String(attachment.Content), type: attachment.ContentType);
+            Message?.AddAttachment(attachment.Name, Convert.ToBase64String(attachment.Content!), type: attachment.ContentType);
         }
 
         return this;

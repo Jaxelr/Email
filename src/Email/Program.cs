@@ -46,10 +46,10 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc(settings.RouteDefinition.Version, new OpenApiInfo
+    options.SwaggerDoc(settings.RouteDefinition?.Version, new OpenApiInfo
     {
         Description = ServiceName,
-        Version = settings.RouteDefinition.Version
+        Version = settings.RouteDefinition?.Version
     });
 
     options.DocInclusionPredicate((_, description) =>
