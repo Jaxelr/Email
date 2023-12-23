@@ -57,7 +57,7 @@ public interface IEmailRepository : IDisposable
     /// Include an attachment to the email
     /// </summary>
     /// <param name="attachment"></param>
-    IEmailRepository Attach(Attachment attachment);
+    IEmailRepository Attach(Attachment? attachment);
 
     /// <summary>
     /// Add html flag on message
