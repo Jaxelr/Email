@@ -21,8 +21,6 @@ public class SmtpRepository : IEmailRepository
     /// <summary>
     /// Initializes the SmtpRepository with the server
     /// </summary>
-    /// <param name="settings"></param>
-    /// <param name="logger"></param>
     public SmtpRepository(Model.AppSettings settings, ILogger<SmtpRepository> logger, RetryPolicy policy) : this(settings, new MailMessage(), logger, policy)
     {
     }
@@ -30,9 +28,6 @@ public class SmtpRepository : IEmailRepository
     /// <summary>
     /// Initialize an SmtpRepository class with a mail message
     /// </summary>
-    /// <param name="settings"></param>
-    /// <param name="message"></param>
-    /// <param name="logger"></param>
     public SmtpRepository(Model.AppSettings settings, MailMessage message, ILogger<SmtpRepository> logger, RetryPolicy policy)
     {
         this.logger = logger;
@@ -52,7 +47,6 @@ public class SmtpRepository : IEmailRepository
     /// <summary>
     /// Add To email recipients
     /// </summary>
-    /// <param name="to"></param>
     public IEmailRepository To(ICollection<string> to)
     {
         to?.ForEach(i => Message?.To.Add(i));
@@ -62,7 +56,6 @@ public class SmtpRepository : IEmailRepository
     /// <summary>
     /// Add Cc emails recipients
     /// </summary>
-    /// <param name="cc"></param>
     public IEmailRepository Cc(ICollection<string> cc)
     {
         cc?.ForEach(i => Message?.CC.Add(i));
@@ -72,7 +65,6 @@ public class SmtpRepository : IEmailRepository
     /// <summary>
     /// Add Bcc emails recipients
     /// </summary>
-    /// <param name="bcc"></param>
     public IEmailRepository Bcc(ICollection<string> bcc)
     {
         bcc?.ForEach(i => Message?.Bcc.Add(i));
@@ -82,7 +74,6 @@ public class SmtpRepository : IEmailRepository
     /// <summary>
     /// Add sender email address
     /// </summary>
-    /// <param name="from"></param>
     public IEmailRepository From(string from)
     {
         Message = new MailMessage
@@ -98,7 +89,6 @@ public class SmtpRepository : IEmailRepository
     /// <summary>
     /// Add email subject
     /// </summary>
-    /// <param name="subject"></param>
     public IEmailRepository Subject(string subject)
     {
         if (Message is { })
@@ -109,7 +99,6 @@ public class SmtpRepository : IEmailRepository
     /// <summary>
     /// Add email body
     /// </summary>
-    /// <param name="body"></param>
     public IEmailRepository Body(string body)
     {
         if (Message is { })
@@ -145,7 +134,7 @@ public class SmtpRepository : IEmailRepository
     {
         if (attachment is { })
         {
-            var _attachment = new Attachment(new MemoryStream(attachment.Content), attachment.Name, attachment.ContentType);
+            var _attachment = new Attachment(new MemoryStream(attachment.Content!), attachment.Name, attachment.ContentType);
             if (!Message!.Attachments.Contains(_attachment))
                 Message.Attachments.Add(_attachment);
         }
