@@ -1,9 +1,9 @@
-﻿using Email.Models.Operations;
+﻿using Em = Email.Models;
 using FluentValidation;
 
 namespace Email.Validation;
 
-public class PostEmailValidator : AbstractValidator<PostEmailRequest>
+public class PostEmailValidator : AbstractValidator<Em.Email>
 {
     public PostEmailValidator()
     {

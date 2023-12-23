@@ -12,10 +12,10 @@ namespace Email.Repositories;
 
 public class SmtpRepository : IEmailRepository
 {
-    private readonly SmtpClient client;
+    private readonly SmtpClient? client;
     private readonly ILogger<SmtpRepository> logger;
     private readonly RetryPolicy policy;
-    public MailMessage Message;
+    public MailMessage? Message;
     private bool bodyIsHtml = true;
 
     /// <summary>
@@ -55,7 +55,7 @@ public class SmtpRepository : IEmailRepository
     /// <param name="to"></param>
     public IEmailRepository To(ICollection<string> to)
     {
-        to?.ForEach(i => Message.To.Add(i));
+        to?.ForEach(i => Message?.To.Add(i));
         return this;
     }
 
@@ -65,7 +65,7 @@ public class SmtpRepository : IEmailRepository
     /// <param name="cc"></param>
     public IEmailRepository Cc(ICollection<string> cc)
     {
-        cc?.ForEach(i => Message.CC.Add(i));
+        cc?.ForEach(i => Message?.CC.Add(i));
         return this;
     }
 
@@ -75,7 +75,7 @@ public class SmtpRepository : IEmailRepository
     /// <param name="bcc"></param>
     public IEmailRepository Bcc(ICollection<string> bcc)
     {
-        bcc?.ForEach(i => Message.Bcc.Add(i));
+        bcc?.ForEach(i => Message?.Bcc.Add(i));
         return this;
     }
 
@@ -93,13 +93,16 @@ public class SmtpRepository : IEmailRepository
         return this;
     }
 
+    public MailMessage GetMessage() => Message!;
+
     /// <summary>
     /// Add email subject
     /// </summary>
     /// <param name="subject"></param>
     public IEmailRepository Subject(string subject)
     {
-        Message.Subject = subject;
+        if (Message is { })
+            Message.Subject = subject;
         return this;
     }
 
@@ -109,7 +112,8 @@ public class SmtpRepository : IEmailRepository
     /// <param name="body"></param>
     public IEmailRepository Body(string body)
     {
-        Message.Body = body;
+        if (Message is { })
+            Message.Body = body;
         return this;
     }
 
@@ -118,7 +122,8 @@ public class SmtpRepository : IEmailRepository
     /// </summary>
     public IEmailRepository HighPriority()
     {
-        Message.Priority = MailPriority.High;
+        if (Message is { })
+            Message.Priority = MailPriority.High;
         return this;
     }
 
@@ -127,7 +132,8 @@ public class SmtpRepository : IEmailRepository
     /// </summary>
     public IEmailRepository LowPriority()
     {
-        Message.Priority = MailPriority.Low;
+        if (Message is { })
+            Message.Priority = MailPriority.Low;
         return this;
     }
 
@@ -140,7 +146,7 @@ public class SmtpRepository : IEmailRepository
         if (attachment != null)
         {
             var _attachment = new Attachment(new MemoryStream(attachment.Content), attachment.Name, attachment.ContentType);
-            if (!Message.Attachments.Contains(_attachment))
+            if (!Message!.Attachments.Contains(_attachment))
                 Message.Attachments.Add(_attachment);
         }
         return this;
@@ -171,8 +177,9 @@ public class SmtpRepository : IEmailRepository
     {
         try
         {
-            Message.IsBodyHtml = bodyIsHtml;
-            await policy.Execute(async () => await client.SendMailAsync(Message));
+            if (Message is { })
+                Message.IsBodyHtml = bodyIsHtml;
+            await policy.Execute(async () => await client?.SendMailAsync(Message!)!);
         }
         catch (Exception ex)
         {
