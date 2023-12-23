@@ -1,7 +1,7 @@
 ﻿using Carter;
 using Carter.OpenApi;
 using Email.Extensions;
-using Email.Models;
+using Em = Email.Models;
 using Email.Models.Operations;
 using Email.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -16,16 +16,21 @@ public class EmailModule : ICarterModule
     private const string ApplicationJson = "application/json";
 
     public void AddRoutes(IEndpointRouteBuilder app) =>
-    app.MapPost("/Email", (HttpContext ctx, PostEmailRequest email, IEmailRepository repository) =>
+    app.MapPost("/Email", (HttpContext ctx, Em.Email email, IEmailRepository repository) =>
     {
         return ctx.ExecHandler(email, (request) =>
         {
             bool ack = repository.From(request.From)
-                                .To(request.To)
-                                .Cc(request.Cc)
-                                .Bcc(request.Bcc)
+                                .To(request.To!)
+                                .Cc(request.Cc!)
+                                .Bcc(request.Bcc!)
                                 .Body(request.Body)
-                                .Subject(request.Subject)
+                                .Subject(request.Subject, repository.From(request.From)
+                                .To(request.To!)
+                                .Cc(request.Cc!)
+                                .Bcc(request.Bcc!)
+                                .Body(request.Body)
+.GetMessage())
                                 .Attach(request.Attachment)
                                 .BodyAsHtml()
                                 .SendAsync()
@@ -39,10 +44,10 @@ public class EmailModule : ICarterModule
         });
     })
     .Produces<PostEmailResponse>(StatusCodes.Status200OK)
-    .Produces<FailedResponse>(StatusCodes.Status400BadRequest)
-    .Produces<FailedResponse>(StatusCodes.Status500InternalServerError)
+    .Produces<Em.FailedResponse>(StatusCodes.Status400BadRequest)
+    .Produces<Em.FailedResponse>(StatusCodes.Status500InternalServerError)
     .WithName("PostEmail")
     .WithTags(ModuleTag)
-    .Accepts<PostEmailRequest>(ApplicationJson)
+    .Accepts<Em.Email>(ApplicationJson)
     .IncludeInOpenApi();
 }

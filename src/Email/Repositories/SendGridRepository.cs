@@ -12,17 +12,15 @@ namespace Email.Repositories;
 
 public class SendGridRepository : IEmailRepository
 {
-    private readonly SendGridClient client;
+    private readonly SendGridClient? client;
     private readonly ILogger<SendGridRepository> logger;
     private readonly RetryPolicy policy;
-    public SendGridMessage Message;
+    public SendGridMessage? Message;
     private bool bodyIsHtml = true;
 
     /// <summary>
     /// Initializes the SendgridRepository with logging and the ApiKey
     /// </summary>
-    /// <param name="settings"></param>
-    /// <param name="logger"></param>
     public SendGridRepository(Model.AppSettings settings, ILogger<SendGridRepository> logger, RetryPolicy policy) : this(settings, new SendGridMessage(), logger, policy)
     {
     }
@@ -30,9 +28,6 @@ public class SendGridRepository : IEmailRepository
     /// <summary>
     /// Initialize a SendGridRepository class with a mail message
     /// </summary>
-    /// <param name="settings"></param>
-    /// <param name="message"></param>
-    /// <param name="logger"></param>
     public SendGridRepository(Model.AppSettings settings, SendGridMessage message, ILogger<SendGridRepository> logger, RetryPolicy policy)
     {
         this.logger = logger;
@@ -52,12 +47,11 @@ public class SendGridRepository : IEmailRepository
     /// <summary>
     /// Include an attachment to the email
     /// </summary>
-    /// <param name="attachment"></param>
     public IEmailRepository Attach(Model.Attachment attachment)
     {
-        if (attachment != null)
+        if (attachment is { })
         {
-            Message.AddAttachment(attachment.Name, Convert.ToBase64String(attachment.Content), type: attachment.ContentType);
+            Message?.AddAttachment(attachment.Name, Convert.ToBase64String(attachment.Content), type: attachment.ContentType);
         }
 
         return this;
@@ -66,12 +60,11 @@ public class SendGridRepository : IEmailRepository
     /// <summary>
     /// Add Bcc emails recipients
     /// </summary>
-    /// <param name="bcc"></param>
     public IEmailRepository Bcc(ICollection<string> bcc)
     {
         if (bcc?.Count > 0)
         {
-            Message.AddBccs(bcc.Select(x => new EmailAddress(x)).ToList());
+            Message?.AddBccs(bcc.Select(x => new EmailAddress(x)).ToList());
         }
 
         return this;
@@ -80,17 +73,10 @@ public class SendGridRepository : IEmailRepository
     /// <summary>
     /// Add email body
     /// </summary>
-    /// <param name="body"></param>
     public IEmailRepository Body(string body)
     {
-        if (bodyIsHtml)
-        {
+        if (Message is { } && bodyIsHtml)
             Message.HtmlContent = body;
-        }
-        else
-        {
-            Message.PlainTextContent = body;
-        }
 
         return this;
     }
@@ -116,12 +102,11 @@ public class SendGridRepository : IEmailRepository
     /// <summary>
     /// Add Cc emails recipients
     /// </summary>
-    /// <param name="cc"></param>
     public IEmailRepository Cc(ICollection<string> cc)
     {
         if (cc?.Count > 0)
         {
-            Message.AddCcs(cc.Select(x => new EmailAddress(x)).ToList());
+            Message?.AddCcs(cc.Select(x => new EmailAddress(x)).ToList());
         }
 
         return this;
@@ -130,7 +115,6 @@ public class SendGridRepository : IEmailRepository
     /// <summary>
     /// Add sender email address
     /// </summary>
-    /// <param name="from"></param>
     public IEmailRepository From(string from)
     {
         Message = new SendGridMessage
@@ -148,7 +132,7 @@ public class SendGridRepository : IEmailRepository
     {
         try
         {
-            await policy.Execute((async () => await client.SendEmailAsync(Message)));
+            await policy.Execute(async () => await client?.SendEmailAsync(Message)!);
             Message = null;
         }
         catch (Exception ex)
@@ -163,22 +147,20 @@ public class SendGridRepository : IEmailRepository
     /// <summary>
     /// Add email subject
     /// </summary>
-    /// <param name="subject"></param>
     public IEmailRepository Subject(string subject)
     {
-        Message.SetSubject(subject);
+        Message?.SetSubject(subject);
         return this;
     }
 
     /// <summary>
     /// Add To email recipients
     /// </summary>
-    /// <param name="to"></param>
     public IEmailRepository To(ICollection<string> to)
     {
         if (to?.Count > 0)
         {
-            Message.AddTos(to.Select(x => new EmailAddress(x)).ToList());
+            Message?.AddTos(to.Select(x => new EmailAddress(x)).ToList());
         }
 
         return this;
