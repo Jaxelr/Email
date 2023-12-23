@@ -141,9 +141,9 @@ public class SmtpRepository : IEmailRepository
     /// Include an attachment to the email
     /// </summary>
     /// <param name="attachment"></param>
-    public IEmailRepository Attach(Model.Attachment attachment)
+    public IEmailRepository Attach(Model.Attachment? attachment)
     {
-        if (attachment != null)
+        if (attachment is { })
         {
             var _attachment = new Attachment(new MemoryStream(attachment.Content), attachment.Name, attachment.ContentType);
             if (!Message!.Attachments.Contains(_attachment))

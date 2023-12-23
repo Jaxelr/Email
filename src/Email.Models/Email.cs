@@ -10,5 +10,5 @@ public class Email
     public ICollection<string>? Bcc { get; set; }
     public string Body { get; set; } = string.Empty;
     public string Subject { get; set; } = string.Empty;
-    public Attachment Attachment { get; set; } = new();
+    public Attachment? Attachment { get; set; }
 }

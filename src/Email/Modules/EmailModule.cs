@@ -2,7 +2,6 @@
 using Carter.OpenApi;
 using Email.Extensions;
 using Em = Email.Models;
-using Email.Models.Operations;
 using Email.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -31,14 +30,14 @@ public class EmailModule : ICarterModule
                                 .SendAsync()
                                 .Result;
 
-            return new PostEmailResponse()
+            return new Em.EmailAck()
             {
                 Successful = ack,
                 Message = $"Message sent at: {System.DateTime.Now}"
             };
         });
     })
-    .Produces<PostEmailResponse>(StatusCodes.Status200OK)
+    .Produces<Em.EmailAck>(StatusCodes.Status200OK)
     .Produces<Em.FailedResponse>(StatusCodes.Status400BadRequest)
     .Produces<Em.FailedResponse>(StatusCodes.Status500InternalServerError)
     .WithName("PostEmail")

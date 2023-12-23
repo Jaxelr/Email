@@ -47,7 +47,7 @@ public class SendGridRepository : IEmailRepository
     /// <summary>
     /// Include an attachment to the email
     /// </summary>
-    public IEmailRepository Attach(Model.Attachment attachment)
+    public IEmailRepository Attach(Model.Attachment? attachment)
     {
         if (attachment is { })
         {
