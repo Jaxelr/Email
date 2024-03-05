@@ -184,8 +184,16 @@ public class SmtpRepository : IEmailRepository
     /// </summary>
     public void Dispose()
     {
-        client?.Dispose();
-        Message?.Dispose();
+        Dispose(true);
         GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            client?.Dispose();
+            Message?.Dispose();
+        }
     }
 }

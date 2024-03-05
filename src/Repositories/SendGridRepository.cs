@@ -181,7 +181,13 @@ public class SendGridRepository : IEmailRepository
     /// </summary>
     public void Dispose()
     {
-        Message = null;
+        Dispose(true);
         GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+            Message = null;
     }
 }
