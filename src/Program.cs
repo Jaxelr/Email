@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Carter;
 using Carter.OpenApi;
+using Email.Extensions;
 using Email.Models;
 using Email.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -17,7 +18,7 @@ using Polly;
 using Serilog;
 
 const string ServiceName = "Email Service";
-const string Policy = "DefaultPolicy";
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,17 +31,7 @@ var settings = new AppSettings();
 
 builder.Configuration.GetSection(nameof(AppSettings)).Bind(settings);
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(Policy,
-    builder =>
-    {
-        builder
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader();
-    });
-});
+builder.AddCors();
 
 //Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -69,7 +60,7 @@ builder.Services.AddCarter();
 
 builder.Services.AddSingleton(builder =>
 {
-    return Polly.Policy.Handle<Exception>().WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+    return Policy.Handle<Exception>().WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
 });
 
 builder.Services.AddSingleton(settings); //typeof(AppSettings)
@@ -80,7 +71,7 @@ builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
-app.UseCors(Policy);
+app.UseCors();
 
 if (builder.Environment.IsDevelopment())
 {
