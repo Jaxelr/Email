@@ -12,9 +12,10 @@ public static class HttpContextExtensions
     /// <summary>
     /// Encapsulate execution of handler with the corresponding validation logic
     /// </summary>
-    /// <typeparam name="TOut"></typeparam>
+    /// <typeparam name="TOut">Type of the response</typeparam>
     /// <param name="ctx">The http context to process</param>
     /// <param name="handler">A func handler that will be validated and executed</param>
+    /// <returns>A Task</returns>
     public static async Task ExecHandler<TOut>(this HttpContext ctx, Func<TOut> handler)
     {
         try
@@ -38,10 +39,12 @@ public static class HttpContextExtensions
     /// <summary>
     /// Encapsulate execution of handler with the validation logic while binding and validating the http request
     /// </summary>
-    /// <typeparam name="TIn"></typeparam>
-    /// <typeparam name="TOut"></typeparam>
+    /// <typeparam name="TIn">Type of the request</typeparam>
+    /// <typeparam name="TOut">Type of the response</typeparam>
     /// <param name="ctx">The http context to process</param>
+    /// <param name="in">The instance of the type for request</param>
     /// <param name="handler">A func handler that will be validated and executed</param>
+    /// <returns>A Task</returns>
     public static async Task ExecHandler<TIn, TOut>(this HttpContext ctx, TIn @in, Func<TIn, TOut> handler)
     {
         try
