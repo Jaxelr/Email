@@ -19,7 +19,6 @@ using Serilog;
 
 const string ServiceName = "Email Service";
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((ctx, services, config) =>

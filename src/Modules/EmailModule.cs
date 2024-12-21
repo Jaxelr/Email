@@ -1,11 +1,11 @@
 ﻿using Carter;
 using Carter.OpenApi;
 using Email.Extensions;
-using Em = Email.Models;
 using Email.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Em = Email.Models;
 
 namespace EmailService.Modules;
 
