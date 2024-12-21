@@ -5,6 +5,7 @@
     <LangVersion>Latest</LangVersion>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="MSBuild_Logs\**" />
@@ -28,10 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.Development.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="appsettings.json">
+    <None Update="appsettings*.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="web.config">
@@ -39,10 +37,7 @@
     </None>
   </ItemGroup>
 
-
   <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-      <_Parameter1>EmailTests</_Parameter1>
-    </AssemblyAttribute>
+    <InternalsVisibleTo Include="EmailTests" />
   </ItemGroup>
 </Project>
