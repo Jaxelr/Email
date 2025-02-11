@@ -24,12 +24,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{5895
 		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
 		.github\dependabot.yml = .github\dependabot.yml
 		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
-		.github\stale.yml = .github\stale.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C966F605-A7B5-4E94-9595-7E6AD3680581}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		.github\workflows\stale.yml = .github\workflows\stale.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{6ECAC52C-9C76-4640-8D1D-4B3B30CB9773}"
