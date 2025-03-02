@@ -57,10 +57,8 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddCarter();
 
-builder.Services.AddSingleton(builder =>
-{
-    return Policy.Handle<Exception>().WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
-});
+builder.Services.AddSingleton(_ =>
+Policy.Handle<Exception>().WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))));
 
 builder.Services.AddSingleton(settings); //typeof(AppSettings)
 builder.Services.AddSingleton<IEmailRepository, SmtpRepository>(); //Switchable with the Sendgrid Repository
@@ -94,7 +92,7 @@ app.UseSwaggerUI();
 
 app.MapCarter();
 
-app.Run();
+await app.RunAsync();
 
 static Task WriteResponse(HttpContext context, HealthReport report)
 {
