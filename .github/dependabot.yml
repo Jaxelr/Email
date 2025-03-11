@@ -1,29 +1,10 @@
 version: 2
 updates:
   - package-ecosystem: "nuget"
-    directory: "/src/Email" #Email.csproj
-    schedule:
-      interval: "weekly"
-      day: "thursday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/src/Email.Models" #Email.Models.csproj
-    schedule:
-      interval: "weekly"
-      day: "thursday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/tests" #EmailTests.csproj
+    directories:
+      - "/src/Email" #Email.csproj
+      - "/src/Email.Models" #Email.Models.csproj
+      - "/tests" #EmailTests.csproj
     schedule:
       interval: "weekly"
       day: "thursday"
