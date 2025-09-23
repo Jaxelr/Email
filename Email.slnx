@@ -1,0 +1,28 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Dockerfile" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/">
+    <File Path=".github/CONTRIBUTING.md" />
+    <File Path=".github/dependabot.yml" />
+    <File Path=".github/PULL_REQUEST_TEMPLATE.md" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/ISSUE_TEMPLATE/">
+    <File Path=".github/ISSUE_TEMPLATE/BUG_REPORT.md" />
+    <File Path=".github/ISSUE_TEMPLATE/FEATURE_REQUEST.md" />
+    <File Path=".github/ISSUE_TEMPLATE/SUPPORT.md" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/workflows/">
+    <File Path=".github/workflows/dotnet.yml" />
+    <File Path=".github/workflows/stale.yml" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Email.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EmailTests.csproj" />
+  </Folder>
+</Solution>
