@@ -148,6 +148,7 @@ csharp_style_unused_value_expression_statement_preference = discard_variable:sil
 csharp_style_prefer_primary_constructors = true:suggestion
 csharp_prefer_system_threading_lock = true:suggestion
 csharp_style_prefer_unbound_generic_type_in_nameof = true:suggestion
+csharp_style_prefer_implicitly_typed_lambda_expression = true:suggestion
 
 # .NET Naming conventions
 
