@@ -16,10 +16,10 @@
 
   <ItemGroup>
     <PackageReference Include="Carter" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="9.0.9" />
     <PackageReference Include="Polly" Version="8.6.4" />
     <PackageReference Include="Sendgrid" Version="9.29.3" />
