@@ -35,7 +35,7 @@ public class EmailModuleTests : IDisposable
         var email = new Models.Email();
 
         //Act
-        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson));
+        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson), TestContext.Current.CancellationToken);
 
         //Assert
         Assert.Equal(HttpStatusCode.UnprocessableEntity, res.StatusCode);
@@ -48,7 +48,7 @@ public class EmailModuleTests : IDisposable
         var email = new Models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" } };
 
         //Act
-        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson));
+        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson), TestContext.Current.CancellationToken);
 
         //Assert
         Assert.Equal(HttpStatusCode.UnprocessableEntity, res.StatusCode);
@@ -61,7 +61,7 @@ public class EmailModuleTests : IDisposable
         var email = new Models.Email() { From = "notreply@mail.com", To = new string[] { "notreply@mail.com" }, Body = "Test", Subject = "Ok" };
 
         //Act
-        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson));
+        var res = await client.PostAsync("/Email", new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, ApplicationJson), TestContext.Current.CancellationToken);
 
         //Assert
         Assert.Equal(HttpStatusCode.OK, res.StatusCode);
