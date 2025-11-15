@@ -56,7 +56,7 @@ The OpenApi version used is Version 3.0.4
 This project depends on net 10.0. The following oss libraries are used on this repo as dependencies:
 
 - [Carter](https://github.com/CarterCommunity/Carter)
-- [Xunit](https://github.com/xunit/xunit)
+- [Xunit.v3](https://github.com/xunit/xunit)
 - [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
 - [Serilog.AspnetCore](https://github.com/serilog/serilog-aspnetcore/)
 - [Sendgrid](https://github.com/sendgrid/sendgrid-csharp)
