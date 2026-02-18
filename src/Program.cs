@@ -2,7 +2,6 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Carter;
-using Carter.OpenApi;
 using Email.Extensions;
 using Email.Models;
 using Email.Repositories;
@@ -13,11 +12,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi;
 using Polly;
 using Serilog;
 
-const string ServiceName = "Email Service";
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,29 +29,7 @@ var settings = new AppSettings();
 builder.Configuration.GetSection(nameof(AppSettings)).Bind(settings);
 
 builder.AddCors();
-
-//Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc(settings.RouteDefinition?.Version, new OpenApiInfo
-    {
-        Description = ServiceName,
-        Version = settings.RouteDefinition?.Version
-    });
-
-    options.DocInclusionPredicate((_, description) =>
-    {
-        foreach (object metaData in description.ActionDescriptor.EndpointMetadata)
-        {
-            if (metaData is IIncludeOpenApi)
-            {
-                return true;
-            }
-        }
-        return false;
-    });
-});
+builder.AddOpenApi(settings);
 
 builder.Services.AddCarter();
 
@@ -87,8 +63,7 @@ app.UseHealthChecks("/healthcheck", new HealthCheckOptions()
     ResponseWriter = WriteResponse
 });
 
-app.UseSwagger();
-app.UseSwaggerUI();
+app.UseOpenApi(settings);
 
 app.MapCarter();
 

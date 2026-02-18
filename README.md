@@ -2,7 +2,7 @@
 
 ![.NET](https://github.com/Jaxelr/Email/workflows/.NET/badge.svg)
 
-This service allows the user to use a local smtp server (or using sendgrid service) and send emails by http requests. It is build on top of aspnet and the Carter library for routing management. It includes a Swagger UI page for discoverability and it is configured to log execution, so that it is easily switchable for any context needed.
+This service allows the user to use a local smtp server (or using sendgrid service) and send emails by http requests. It is build on top of aspnet and the Carter library for routing management. It includes a UI page for discoverability and it is configured to log execution, so that it is easily switchable for any context needed.
 
 ## Configurations
 
@@ -57,7 +57,7 @@ This project depends on net 10.0. The following oss libraries are used on this r
 
 - [Carter](https://github.com/CarterCommunity/Carter)
 - [Xunit.v3](https://github.com/xunit/xunit)
-- [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
+- [Scalar.AspNetCore](https://github.com/scalar/scalar)
 - [Serilog.AspnetCore](https://github.com/serilog/serilog-aspnetcore/)
 - [Sendgrid](https://github.com/sendgrid/sendgrid-csharp)
 - [Polly](https://github.com/App-vNext/Polly)
