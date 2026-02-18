@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Carter" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Extensions.Configuration" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
@@ -24,7 +25,7 @@
     <PackageReference Include="Polly" />
     <PackageReference Include="Sendgrid" />
     <PackageReference Include="Serilog.AspNetCore" />
-    <PackageReference Include="Swashbuckle.AspNetCore" />
+    <PackageReference Include="Scalar.AspNetCore" />
   </ItemGroup>
 
   <ItemGroup>
