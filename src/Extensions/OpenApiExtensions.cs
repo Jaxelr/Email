@@ -30,8 +30,8 @@ public static class OpenApiExtensions
 
     public static WebApplication UseOpenApi(this WebApplication app, AppSettings settings)
     {
-        app.MapOpenApi($"{settings.RouteDefinition?.RouteSuffix}/{settings.RouteDefinition?.Version}.json");
-        app.MapScalarApiReference($"{settings.RouteDefinition?.RouteSuffix}");
+        app.MapOpenApi($"{settings.RouteDefinition?.Resource}/{settings.RouteDefinition?.Version}.json");
+        app.MapScalarApiReference($"{settings.RouteDefinition?.Resource}");
         return app;
     }
 }

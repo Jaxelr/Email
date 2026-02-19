@@ -35,7 +35,7 @@ The current appsettings.json can be configured manually:
       ""
     ],
     "RouteDefinition": {
-      "RouteSuffix": "swagger",
+      "Resource": "/openapi",
       "Version": "v1"
     }
   }
@@ -49,7 +49,7 @@ The endpoint of root/healthcheck for each requests includes a json heartbeat to 
 
 ## OpenApi
 
-The OpenApi version used is Version 3.0.4
+The OpenApi version used is Version 3.1.1
 
 ## Dependencies & Libraries
 
