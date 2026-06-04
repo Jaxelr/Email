@@ -1,10 +1,7 @@
-using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Carter;
 using Email.Extensions;
 using Email.Models;
-using Email.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
-using Polly;
 using Serilog;
 
 
@@ -31,13 +27,8 @@ builder.Configuration.GetSection(nameof(AppSettings)).Bind(settings);
 builder.AddCors();
 builder.AddOpenApi(settings);
 
-builder.Services.AddCarter();
-
-builder.Services.AddSingleton(_ =>
-Policy.Handle<Exception>().WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))));
-
-builder.Services.AddSingleton(settings); //typeof(AppSettings)
-builder.Services.AddSingleton<IEmailRepository, SmtpRepository>(); //Switchable with the Sendgrid Repository
+builder.AddCarter();
+builder.AddDependencies(settings);
 
 //HealthChecks
 builder.Services.AddHealthChecks();
@@ -65,7 +56,7 @@ app.UseHealthChecks("/healthcheck", new HealthCheckOptions()
 
 app.UseOpenApi(settings);
 
-app.MapCarter();
+app.UseCarter();
 
 await app.RunAsync();
 
