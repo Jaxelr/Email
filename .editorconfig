@@ -3,6 +3,7 @@ root = true
 
 #All Files
 [*]
+charset = utf-8
 end_of_line = crlf
 indent_size = 4
 indent_style = space
@@ -14,7 +15,7 @@ trim_trailing_whitespace = true
 indent_style = tab
 
 # Visual Studio XML Project Files
-[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj,slnx}]
 indent_size = 2
 
 # XML Configuration Files
@@ -36,7 +37,6 @@ trim_trailing_whitespace = true
 # Web Files
 [*.{htm,html,js,ts,tsx,css,sass,scss,less,svg,vue}]
 indent_size = 2
-insert_final_newline = true
 
 # Batch Files
 [*.{cmd,bat}]
@@ -44,6 +44,11 @@ insert_final_newline = true
 # Bash Files
 [*.sh]
 end_of_line = lf
+
+# F# Files
+[*.{fs,fsx,fsi}]
+indent_size = 4
+trim_trailing_whitespace = true
 
 # CSharp code style settings:
 [*.cs]
@@ -94,7 +99,12 @@ csharp_style_expression_bodied_properties = true:suggestion
 csharp_style_inlined_variable_declaration = true:suggestion
 csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
 csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
+csharp_style_prefer_extended_property_pattern = true:suggestion
+csharp_style_prefer_not_pattern = true:suggestion
+csharp_style_prefer_pattern_matching = true:suggestion
+csharp_style_prefer_switch_expression = true:suggestion
 csharp_style_throw_expression = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
 csharp_style_var_for_built_in_types = false:suggestion
 csharp_style_var_when_type_is_apparent = true:suggestion
 # Organize usings
@@ -120,21 +130,23 @@ dotnet_style_prefer_inferred_tuple_names = true:suggestion
 dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
 dotnet_style_prefer_compound_assignment = true:suggestion
 dotnet_style_prefer_simplified_interpolation = true:suggestion
-dotnet_style_namespace_match_folder = true:suggestion
-dotnet_style_readonly_field = true:suggestion
+dotnet_style_namespace_match_folder = false:suggestion
 dotnet_style_prefer_collection_expression = when_types_exactly_match:suggestion
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
+# .NET Naming conventions
 csharp_indent_labels = one_less_than_current
-csharp_using_directive_placement = outside_namespace:silent
+csharp_using_directive_placement = outside_namespace:warning
 csharp_prefer_simple_using_statement = true:suggestion
 csharp_prefer_braces = true:silent
-csharp_style_namespace_declarations = block_scoped:silent
+csharp_style_namespace_declarations = file_scoped:warning
 csharp_style_prefer_method_group_conversion = true:silent
 csharp_style_prefer_top_level_statements = true:silent
 csharp_style_expression_bodied_constructors = false:silent
 csharp_style_expression_bodied_lambdas = true:silent
 csharp_style_expression_bodied_local_functions = false:silent
 csharp_style_prefer_null_check_over_type_check = true:suggestion
+csharp_style_prefer_primary_constructors = false:suggestion
+csharp_prefer_system_threading_lock = true:suggestion
 csharp_prefer_simple_default_expression = true:suggestion
 csharp_style_prefer_local_over_anonymous_function = true:suggestion
 csharp_style_prefer_index_operator = true:suggestion
@@ -145,14 +157,18 @@ csharp_style_prefer_utf8_string_literals = true:suggestion
 csharp_style_deconstructed_variable_declaration = true:suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:suggestion
 csharp_style_unused_value_expression_statement_preference = discard_variable:silent
-csharp_style_prefer_primary_constructors = true:suggestion
-csharp_prefer_system_threading_lock = true:suggestion
-csharp_style_prefer_unbound_generic_type_in_nameof = true:suggestion
 csharp_style_prefer_implicitly_typed_lambda_expression = true:suggestion
+csharp_style_prefer_unbound_generic_type_in_nameof = true:suggestion
+csharp_style_prefer_readonly_struct = true:suggestion
+csharp_prefer_static_local_function = true:suggestion
+# C# Code Quality
+dotnet_diagnostic.CA1501.severity = warning
+dotnet_diagnostic.CA1502.severity = warning
+dotnet_diagnostic.CA1505.severity = warning
+dotnet_diagnostic.CA1506.severity = warning
 
 # .NET Naming conventions
-
-[*.{cs,csx,cake,vb}]
+[*.{cs,csx,cake}]
 # Naming Symbols
 dotnet_naming_symbols.constant_fields.applicable_kinds = field
 dotnet_naming_symbols.constant_fields.required_modifiers = const
@@ -173,14 +189,12 @@ dotnet_naming_symbols.public_symbols.applicable_kinds = method, property, event,
 dotnet_naming_symbols.parameters.applicable_kinds = parameter
 dotnet_naming_symbols.non_interface_types.applicable_kinds = class, struct, enum, delegate
 dotnet_naming_symbols.interface_types.applicable_kinds = interface
-
 # Naming Styles
 dotnet_naming_style.camel_case.capitalization = camel_case
 dotnet_naming_style.pascal_case.capitalization = pascal_case
 dotnet_naming_style.first_upper.capitalization = first_word_upper
 dotnet_naming_style.prefix_interface_interface_with_i.capitalization = pascal_case
 dotnet_naming_style.prefix_interface_interface_with_i.required_prefix = I
-
 # Naming Rules
 dotnet_naming_rule.constant_fields_must_be_pascal_case.severity = warning
 dotnet_naming_rule.constant_fields_must_be_pascal_case.symbols = constant_fields
@@ -210,7 +224,6 @@ dotnet_naming_rule.interface_types_must_be_prefixed_with_i.severity = warning
 dotnet_naming_rule.interface_types_must_be_prefixed_with_i.symbols = interface_types
 dotnet_naming_rule.interface_types_must_be_prefixed_with_i.style = prefix_interface_interface_with_i
 
-# Custom Project Rule
+# Custom
+dotnet_diagnostic.IDE0052.severity = none
 dotnet_diagnostic.RCS1090.severity = none
-dotnet_diagnostic.IDE0130.severity = none
-
