@@ -22,6 +22,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
+    <PackageReference Include="Microsoft.OpenApi" />
     <PackageReference Include="Polly" />
     <PackageReference Include="Sendgrid" />
     <PackageReference Include="Serilog.AspNetCore" />
