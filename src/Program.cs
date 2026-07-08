@@ -11,8 +11,6 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((ctx, services, config) =>
