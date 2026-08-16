@@ -1,4 +1,4 @@
-﻿using Email.Models;
+using Email.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi;
@@ -10,6 +10,9 @@ public static class OpenApiExtensions
 {
     private const string ServiceName = "Email Service";
 
+    /// <summary>
+    /// Adds and configures OpenAPI services for the application.
+    /// </summary>
     public static WebApplicationBuilder AddOpenApi(this WebApplicationBuilder builder, AppSettings settings)
     {
         builder.Services.AddOpenApi(settings.RouteDefinition?.Version!, options =>
@@ -28,6 +31,9 @@ public static class OpenApiExtensions
         return builder;
     }
 
+    /// <summary>
+    /// Maps the OpenAPI document and Scalar API reference endpoints.
+    /// </summary>
     public static WebApplication UseOpenApi(this WebApplication app, AppSettings settings)
     {
         app.MapOpenApi($"{settings.RouteDefinition?.Resource}/{settings.RouteDefinition?.Version}.json");
