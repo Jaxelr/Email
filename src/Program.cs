@@ -1,13 +1,7 @@
-using System.Text.Json;
-using System.Threading.Tasks;
 using Email.Extensions;
 using Email.Models;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -27,9 +21,7 @@ builder.AddOpenApi(settings);
 
 builder.AddCarter();
 builder.AddDependencies(settings);
-
-//HealthChecks
-builder.Services.AddHealthChecks();
+builder.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -47,27 +39,10 @@ else
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseHealthChecks("/healthcheck", new HealthCheckOptions()
-{
-    ResponseWriter = WriteResponse
-});
+app.UseHealthChecks();
 
 app.UseOpenApi(settings);
 
 app.UseCarter();
 
 await app.RunAsync();
-
-static Task WriteResponse(HttpContext context, HealthReport report)
-{
-    context.Response.ContentType = "application/json";
-
-    var json = new
-    {
-        statusCode = report.Status,
-        status = report.Status.ToString(),
-        timelapsed = report.TotalDuration
-    };
-
-    return context.Response.WriteAsync(JsonSerializer.Serialize(json));
-}
