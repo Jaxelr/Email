@@ -1,4 +1,4 @@
-﻿namespace Email.Models;
+namespace Email.Models;
 
 public class EmailAck
 {

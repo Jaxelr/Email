@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Em = Email.Models;
 
 namespace Email.Validation;

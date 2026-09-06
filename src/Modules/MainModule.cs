@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Carter;
 using Email.Models;
 using Microsoft.AspNetCore.Builder;
