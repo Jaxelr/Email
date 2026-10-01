@@ -1,0 +1,3 @@
+# Match the line endings required by .editorconfig on every platform.
+* text=auto eol=crlf
+*.sh text eol=lf
