@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Polly.Retry;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using static Laminar.Retry;
 using Model = Email.Models;
 
 namespace Email.Repositories;
@@ -14,24 +14,22 @@ public class SendGridRepository : IEmailRepository
 {
     private readonly SendGridClient? client;
     private readonly ILogger<SendGridRepository> logger;
-    private readonly RetryPolicy policy;
     public SendGridMessage? Message;
     private bool bodyIsHtml = true;
 
     /// <summary>
     /// Initializes the SendgridRepository with logging and the ApiKey
     /// </summary>
-    public SendGridRepository(Model.AppSettings settings, ILogger<SendGridRepository> logger, RetryPolicy policy) : this(settings, new SendGridMessage(), logger, policy)
+    public SendGridRepository(Model.AppSettings settings, ILogger<SendGridRepository> logger) : this(settings, new SendGridMessage(), logger)
     {
     }
 
     /// <summary>
     /// Initialize a SendGridRepository class with a mail message
     /// </summary>
-    public SendGridRepository(Model.AppSettings settings, SendGridMessage message, ILogger<SendGridRepository> logger, RetryPolicy policy)
+    public SendGridRepository(Model.AppSettings settings, SendGridMessage message, ILogger<SendGridRepository> logger)
     {
         this.logger = logger;
-        this.policy = policy;
 
         try
         {
@@ -132,7 +130,7 @@ public class SendGridRepository : IEmailRepository
     {
         try
         {
-            await policy.Execute(async () => await client?.SendEmailAsync(Message)!);
+            await Retryable(() => client?.SendEmailAsync(Message)!);
             Message = null;
         }
         catch (Exception ex)

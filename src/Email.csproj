@@ -23,7 +23,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
     <PackageReference Include="Microsoft.OpenApi" />
-    <PackageReference Include="Polly" />
+    <PackageReference Include="Laminar" />
     <PackageReference Include="Sendgrid" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Scalar.AspNetCore" />

@@ -60,5 +60,4 @@ This project depends on net 10.0. The following oss libraries are used on this r
 - [Scalar.AspNetCore](https://github.com/scalar/scalar)
 - [Serilog.AspnetCore](https://github.com/serilog/serilog-aspnetcore/)
 - [Sendgrid](https://github.com/sendgrid/sendgrid-csharp)
-- [Polly](https://github.com/App-vNext/Polly)
-
+- [Laminar](https://github.com/Jaxelr/Laminar)

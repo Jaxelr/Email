@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Email.Extensions;
 using Microsoft.Extensions.Logging;
-using Polly.Retry;
+using static Laminar.Retry;
 using Model = Email.Models;
 
 namespace Email.Repositories;
@@ -14,24 +14,22 @@ public class SmtpRepository : IEmailRepository
 {
     private readonly SmtpClient? client;
     private readonly ILogger<SmtpRepository> logger;
-    private readonly RetryPolicy policy;
     public MailMessage? Message;
     private bool bodyIsHtml = true;
 
     /// <summary>
     /// Initializes the SmtpRepository with the server
     /// </summary>
-    public SmtpRepository(Model.AppSettings settings, ILogger<SmtpRepository> logger, RetryPolicy policy) : this(settings, new MailMessage(), logger, policy)
+    public SmtpRepository(Model.AppSettings settings, ILogger<SmtpRepository> logger) : this(settings, new MailMessage(), logger)
     {
     }
 
     /// <summary>
     /// Initialize an SmtpRepository class with a mail message
     /// </summary>
-    public SmtpRepository(Model.AppSettings settings, MailMessage message, ILogger<SmtpRepository> logger, RetryPolicy policy)
+    public SmtpRepository(Model.AppSettings settings, MailMessage message, ILogger<SmtpRepository> logger)
     {
         this.logger = logger;
-        this.policy = policy;
 
         try
         {
@@ -168,7 +166,7 @@ public class SmtpRepository : IEmailRepository
         {
             if (Message is { })
                 Message.IsBodyHtml = bodyIsHtml;
-            await policy.Execute(async () => await client?.SendMailAsync(Message!)!);
+            await Retryable(() => client?.SendMailAsync(Message!)!);
         }
         catch (Exception ex)
         {
