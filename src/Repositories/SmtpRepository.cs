@@ -4,8 +4,8 @@ using System.IO;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Email.Extensions;
-using Laminar;
 using Microsoft.Extensions.Logging;
+using static Laminar.Retry;
 using Model = Email.Models;
 
 namespace Email.Repositories;
@@ -166,7 +166,7 @@ public class SmtpRepository : IEmailRepository
         {
             if (Message is { })
                 Message.IsBodyHtml = bodyIsHtml;
-            await ResilienceExtensions.Retryable(() => client?.SendMailAsync(Message!)!)(default);
+            await Retryable(() => client?.SendMailAsync(Message!)!);
         }
         catch (Exception ex)
         {

@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Laminar;
 using Microsoft.Extensions.Logging;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using static Laminar.Retry;
 using Model = Email.Models;
 
 namespace Email.Repositories;
@@ -130,7 +130,7 @@ public class SendGridRepository : IEmailRepository
     {
         try
         {
-            await ResilienceExtensions.Retryable(() => client?.SendEmailAsync(Message)!)(default);
+            await Retryable(() => client?.SendEmailAsync(Message)!);
             Message = null;
         }
         catch (Exception ex)
