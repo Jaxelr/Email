@@ -60,4 +60,4 @@ This project depends on net 10.0. The following oss libraries are used on this r
 - [Scalar.AspNetCore](https://github.com/scalar/scalar)
 - [Serilog.AspnetCore](https://github.com/serilog/serilog-aspnetcore/)
 - [Sendgrid](https://github.com/sendgrid/sendgrid-csharp)
-- [Laminar](https://github.com/Jaxelr/Laminar) 0.1.3: default retries for SMTP and SendGrid through the immediate `Retryable(...)` facade, without injected retry policies.
+- [Laminar](https://github.com/Jaxelr/Laminar)
