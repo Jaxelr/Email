@@ -17,6 +17,7 @@ public static class OpenApiExtensions
     {
         builder.Services.AddOpenApi(settings.RouteDefinition?.Version!, options =>
         {
+            options.OpenApiVersion = OpenApiSpecVersion.OpenApi3_1;
             options.AddDocumentTransformer((document, _, _) =>
             {
                 document.Info = new OpenApiInfo

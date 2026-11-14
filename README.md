@@ -49,11 +49,11 @@ The endpoint of root/healthcheck for each requests includes a json heartbeat to 
 
 ## OpenApi
 
-The OpenApi version used is Version 3.1.1
+The service explicitly uses the OpenAPI 3.1 specification to preserve compatibility when upgrading .NET.
 
 ## Dependencies & Libraries
 
-This project depends on net 10.0. The following oss libraries are used on this repo as dependencies:
+This project targets .NET 11 and requires the .NET 11 SDK. The following oss libraries are used on this repo as dependencies:
 
 - [Carter](https://github.com/CarterCommunity/Carter)
 - [Xunit.v3](https://github.com/xunit/xunit)
